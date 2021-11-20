@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>image/local_music_icon.svg</file>
+        <file>image/historical_music_icon.svg</file>
+        <file>image/clouddrive_music_icon.svg</file>
+        <file>image/downloaded_music_icon.svg</file>
+    </qresource>
+</RCC>
