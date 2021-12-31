@@ -1,19 +1,23 @@
 QT += quick quickcontrols2 svg network
 
-CONFIG += c++11 qtquickcompiler
+CONFIG += c++11 #qtquickcompiler
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp
+        Qt-AES/qaesencryption.cpp \
+        main.cpp \
+        crypto/weapi.cpp
 
 RESOURCES += qml.qrc \
              image.qrc
 
 CONFIG += lrelease
 CONFIG += embed_translations
+
+LIBS += -lcrypto
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -37,3 +41,10 @@ DISTFILES += \
     android/res/values/libs.xml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+HEADERS += \
+    Qt-AES/aesni/aesni-enc-cbc.h \
+    Qt-AES/aesni/aesni-enc-ecb.h \
+    Qt-AES/aesni/aesni-key-exp.h \
+    Qt-AES/qaesencryption.h \
+    crypto/weapi.h

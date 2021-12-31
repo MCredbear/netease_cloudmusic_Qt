@@ -8,6 +8,8 @@
 #include <QSGRendererInterface>
 #include <QQuickWindow>
 
+#include "crypto/weapi.h"
+
 int main(int argc, char *argv[])
 {
     QQuickStyle::setStyle("Material");
@@ -17,6 +19,10 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
+
+    weapi weapi;
+    qDebug()<<weapi.params();
+    qDebug()<<weapi.encSecKey();
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
