@@ -9,6 +9,7 @@ class weapi : public QObject // from https://github.com/binaryify/NeteaseCloudMu
 public:
     explicit weapi(QObject *parent = nullptr);
 
+    //QString aesEncrypt(QByteArray key, QByteArray iv, QByteArray code);
     QByteArray rsaPubEncrypt(QByteArray plainDataArry, QByteArray pubKeyArry);
     QByteArray publicKey = "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ3\n4ZC28NWYpAUd98iZ37BUrX/aKzmFbt7clFSs6sXqHauqKWqdtLkF2KexO40H1YTX8z2lSgBBOAxLsvakl\nV8k4cBFK9snQXE9/DDaFt6Rr7iVZMldczhC0JNgTz+SHXT6CBHuX3e9SdB1Ua44o\nncaTWz7OBGLbCiK45wIDAQAB\n-----END PUBLIC KEY-----";
     /* OpenSSL public key format:
@@ -22,8 +23,8 @@ public:
     QByteArray base62 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     QByteArray secretKey;
 
-    QByteArray params();
-    QByteArray encSecKey();
+    Q_INVOKABLE QByteArray params(QByteArray postdata);
+    Q_INVOKABLE QByteArray encSecKey();
 
 
 signals:

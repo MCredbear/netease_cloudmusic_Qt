@@ -8,8 +8,12 @@ CONFIG += c++11 #qtquickcompiler
 
 SOURCES += \
         Qt-AES/qaesencryption.cpp \
+        login_cellphone.cpp \
+        login_qr.cpp \
+        lyric.cpp \
         main.cpp \
-        crypto/weapi.cpp
+        crypto/weapi.cpp \
+        song_detail.cpp
 
 RESOURCES += qml.qrc \
              image.qrc
@@ -47,4 +51,8 @@ HEADERS += \
     Qt-AES/aesni/aesni-enc-ecb.h \
     Qt-AES/aesni/aesni-key-exp.h \
     Qt-AES/qaesencryption.h \
-    crypto/weapi.h
+    crypto/weapi.h \
+    login_cellphone.h \
+    login_qr.h \
+    lyric.h \
+    song_detail.h

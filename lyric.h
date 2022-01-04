@@ -3,12 +3,12 @@
 
 #include <QObject>
 
-class lyric : public QObject
+class lyric : public QObject // from https://github.com/binaryify/NeteaseCloudMusicApi/module/lyric.js
 {
     Q_OBJECT
 public:
     explicit lyric(QObject *parent = nullptr);
-    Q_INVOKABLE static QByteArray getLyric(QByteArray id);
+    Q_INVOKABLE QByteArray getLyric(QByteArray id); // I'm thinking about whether define this as a static function
 
 signals:
 
