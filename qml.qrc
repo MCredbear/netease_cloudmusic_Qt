@@ -3,5 +3,7 @@
         <file>main.qml</file>
         <file>Drawer_Button.qml</file>
         <file>Fixed_Button.qml</file>
+        <file>Login_Page.qml</file>
+        <file>Home_Page.qml</file>
     </qresource>
 </RCC>

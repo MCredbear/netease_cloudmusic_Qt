@@ -8,7 +8,7 @@ class login_cellphone : public QObject
     Q_OBJECT
 public:
     explicit login_cellphone(QObject *parent = nullptr);
-    Q_INVOKABLE QByteArray login(QByteArray phone, QByteArray password);
+    Q_INVOKABLE QByteArray withPassword(QByteArray phone, QByteArray password);
 
 signals:
 
