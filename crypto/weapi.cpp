@@ -12,6 +12,8 @@ weapi::weapi(QObject *parent) // from https://github.com/binaryify/NeteaseCloudM
 
 }
 
+QByteArray weapi::secretKey;
+
 QByteArray weapi::params(QByteArray postdata)
 {
     QByteArray data;
@@ -77,37 +79,3 @@ QByteArray weapi::rsaPubEncrypt(QByteArray plainDataArry, QByteArray pubKeyArry)
 
     return arry;
 }
-
-/*QString weapi::aesEncrypt(QByteArray key, QByteArray iv, QByteArray code)
-{
-    unsigned char sourceStringTemp[MSG_LEN];
-    memset((unsigned char*)sourceStringTemp, 0x00 ,MSG_LEN);
-    strcpy( (char*)sourceStringTemp, code.constData() );
-
-    unsigned char keyArray[AES_BLOCK_SIZE*2];
-    memset((unsigned char*)keyArray, 0x00 ,AES_BLOCK_SIZE*2);
-    strcpy( (char*)keyArray, key.toLatin1().constData() );
-
-    unsigned char codeKey[AES_BLOCK_SIZE*2];
-    for (int j = 0; j < AES_BLOCK_SIZE*2 ; ++j) {
-        codeKey[j] = keyArray[j];
-    }
-
-    unsigned char codeIvec[ivec.size()];
-    for(int j = 0; j < ivec.size(); ++j) {
-        codeIvec[j] = ivec[j].unicode();
-    }
-
-    unsigned char result[MSG_LEN];
-    memset((unsigned char*)result, 0x00 ,MSG_LEN);
-    if( !aes_encrypt(sourceStringTemp,codeKey,codeIvec,result) ) {
-        qDebug() << "Encode Error";
-        return "";
-    }
-
-    QByteArray by_result = (char*)result;
-    QString s_result(by_result.toBase64());
-
-    memset((char*)sourceStringTemp, 0x00 ,MSG_LEN);
-    return s_result;
-}*/

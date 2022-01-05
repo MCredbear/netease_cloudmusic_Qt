@@ -9,7 +9,6 @@
 #include <QSGRendererInterface>
 #include <QQuickWindow>
 
-#include "crypto/weapi.h"
 #include "login_cellphone.h"
 #include "login_qr.h"
 #include "lyric.h"
@@ -26,7 +25,6 @@ int main(int argc, char *argv[])
 
     login_cellphone login;
     login_qr login_qr;
-    weapi weapi;
     lyric lyric;
 
     QTranslator translator;
@@ -40,7 +38,7 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("weapi",&weapi);
+
     engine.rootContext()->setContextProperty("login",&login);
     engine.rootContext()->setContextProperty("lyric",&lyric);
     engine.rootContext()->setContextProperty("login_qr",&login_qr);

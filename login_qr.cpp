@@ -20,9 +20,8 @@ QByteArray login_qr::creatQRKey()
     request.setUrl(QUrl("https://music.163.com/weapi/login/qrcode/unikey"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
     QByteArray postdata;
-    weapi weapi;
-    postdata.append("params=" + weapi.params("{\"type\":1}") + "&");
-    postdata.append("encSecKey=" + weapi.encSecKey());qDebug()<<postdata;
+    postdata.append("params=" + weapi::params("{\"type\":1}") + "&");
+    postdata.append("encSecKey=" + weapi::encSecKey());qDebug()<<postdata;
     QNetworkReply *reply = manager.post(request, postdata);
     connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
     eventloop.exec();

@@ -85,15 +85,8 @@ Window {
             height: profile_photo.y*2+profile_photo.height
 
             onReleased: {
-                /*const data = {
-                    phone: '233',
-                    countrycode: '86',
-                    password: '666',
-                    rememberLogin: 'true',
-                }
-                console.log(login.login_test(JSON.stringify(data)).toString())
-                */
-                console.log(login_qr.creatQRKey().toString())
+
+
             }
 
             Rectangle {
