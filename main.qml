@@ -162,8 +162,9 @@ Window {
     }
     StackView {
         id: stack
+        y: top_toolbar.height
         width: window.width
-        height: window.height-100
+        height: window.height-top_toolbar.height-bottom_toolbar.height
 
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -171,13 +172,15 @@ Window {
 
 
     }
-    Home_Page {
+    Component {
         id: home_page
+        Home_Page {}
     }
-    Login_Page {
+    Component {
         id: login_page
-
+        Login_Page {}
     }
+
 
 }
 

@@ -21,7 +21,10 @@ RESOURCES += qml.qrc \
 CONFIG += lrelease
 CONFIG += embed_translations
 
-LIBS += -lcrypto
+!android: LIBS += -lcrypto
+android: include(/home/redbear/android-sdk-linux/android_openssl/openssl.pri)   # Qt's support for Android is still too poor
+android: LIBS+= /home/redbear/android-sdk-linux/android_openssl/no-asm/latest/arm64/libcrypto.so.
+android: INCLUDEPATH += /home/redbear/android-sdk-linux/android_openssl/static/include/
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -56,3 +59,5 @@ HEADERS += \
     login_qr.h \
     lyric.h \
     song_detail.h
+
+

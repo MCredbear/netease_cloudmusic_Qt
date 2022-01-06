@@ -9,7 +9,6 @@ Item {
     Rectangle {
         id: fixed_layout
         z: 9
-        y: top_toolbar.height
         width: parent.width
         height: parent.height/2
         color: Material.background
@@ -27,7 +26,6 @@ Item {
                 onReleased: {
                     stack.push(login_page)
                 }
-
                 Rectangle {
                     id: user_profile_layout_unlogged_mask
                     visible: true
@@ -90,7 +88,7 @@ Item {
             }
 
 
-            Rectangle {
+            Rectangle { // a space
                 width: parent.width
                 height: 4
                 color: "#00000000"
@@ -98,7 +96,7 @@ Item {
 
             Fixed_Button {
                 id: local_music
-                height: (parent.height-4)/5
+                height: (parent.height-user_profile_layout.height-4)/4
                 Text {
                     text: qsTr("本地音乐")
                     font.pointSize: 20
@@ -107,7 +105,7 @@ Item {
             }
             Fixed_Button {
                 id: historical_music
-                height: (parent.height-4)/5
+                height: (parent.height-user_profile_layout.height-4)/4
                 Text {
                     text: qsTr("最近播放")
                     font.pointSize: 20
@@ -116,7 +114,7 @@ Item {
             }
             Fixed_Button {
                 id: clouddrive_music
-                height: (parent.height-4)/5
+                height: (parent.height-user_profile_layout.height-4)/4
                 Text {
                     text: qsTr("云盘")
                     font.pointSize: 20
@@ -125,7 +123,7 @@ Item {
             }
             Fixed_Button {
                 id: downloaded_music //downloaded,but in this app's own directory
-                height: (parent.height-4)/5
+                height: (parent.height-user_profile_layout.height-4)/4
                 Text {
                     text: qsTr("已下载音乐")
                     font.pointSize: 20

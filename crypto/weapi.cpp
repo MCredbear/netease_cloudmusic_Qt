@@ -18,7 +18,7 @@ QByteArray weapi::params(QByteArray postdata)
 {
     QByteArray data;
     for (int i = 0 ; i < 16 ; i++)  secretKey.append(base62.mid(QRandomGenerator::global()->bounded(0, 61)),1); // generate 16 Byte random key
-    QAESEncryption encryption(QAESEncryption::AES_128, QAESEncryption::CBC, QAESEncryption::PKCS7); // nodeJS uses PKSC7
+    QAESEncryption encryption(QAESEncryption::AES_128, QAESEncryption::CBC, QAESEncryption::PKCS7); // nodeJS uses PKSC5
     data = encryption.encode(postdata, presetKey, iv).toBase64();
     data = encryption.encode(data, secretKey, iv).toBase64();
     data = data.toPercentEncoding();
