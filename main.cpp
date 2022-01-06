@@ -75,7 +75,14 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("lyric",&lyric);
     engine.rootContext()->setContextProperty("login_qr",&login_qr);
 
+#ifndef Q_OS_ANDROID
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+#endif
+
+#ifdef Q_OS_ANDROID
+    const QUrl url(QStringLiteral("/sdcard/main.qml")); // for debug
+#endif
+
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)

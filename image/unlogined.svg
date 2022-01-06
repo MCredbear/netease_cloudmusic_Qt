@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256.0px"
+   height="256.0px"
+   viewBox="0 0 256.0 256.0"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="unlogined.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview11"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="3.0625"
+     inkscape:cx="119.02041"
+     inkscape:cy="103.34694"
+     inkscape:window-width="1920"
+     inkscape:window-height="983"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="SVGRoot" />
+  <defs
+     id="defs9929">
+    <rect
+       x="0"
+       y="0"
+       width="255"
+       height="255"
+       id="rect169371" />
+    <rect
+       x="256"
+       y="256"
+       width="256"
+       height="256"
+       id="rect146495" />
+    <rect
+       x="0"
+       y="0"
+       width="11"
+       height="6"
+       id="rect61767" />
+  </defs>
+  <g
+     id="layer1"
+     style="fill:#808080"
+     transform="matrix(0.78124999,0,0,0.78125,4.375e-8,300)">
+    <text
+       xml:space="preserve"
+       id="text61765"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect61767);fill:#808080;fill-opacity:1;stroke:none" />
+    <text
+       xml:space="preserve"
+       id="text169369"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect169371);fill:#808080;fill-opacity:1;stroke:none"
+       transform="matrix(15.311005,0,0,8.1321474,-28.172249,-75.466328)"><tspan
+         x="0"
+         y="40.2"
+         id="tspan70">?</tspan></text>
+  </g>
+</svg>

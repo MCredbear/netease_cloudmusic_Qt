@@ -1,9 +1,9 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.impl 2.12
-import QtQuick.Controls.Material 2.3
-import QtQuick.Controls.Material.impl 2.12
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.impl 2.15
+import QtQuick.Controls.Material 2.15
+import QtQuick.Controls.Material.impl 2.15
 
 //qml files in the same qrc directory needn't(shouldn't) import
 import QtQuick.Layouts 1.11
@@ -16,7 +16,8 @@ Window {
     Material.theme: Material.Dark
     color: Material.backgroundColor
     title: qsTr("Netease Cloud Music")
-    Material.primary: Material.Red
+    Material.primary: "#303030"
+    Material.background: "#101010"
     ToolBar {
         id: top_toolbar
         z: 10
@@ -28,14 +29,14 @@ Window {
             id: side_drawer_button
             anchors.left: parent.left
             text: "\u2261"
-            font.pixelSize: 20
+            font.pixelSize: 22
             onReleased: side_drawer.open()
         }
         ToolButton {
             id: back_button
             anchors.right: parent.right
             text: "\u2190"
-            font.pixelSize: 20
+            font.pixelSize: 22
             visible: stack.depth > 1
             onReleased: stack.pop()
         }
@@ -43,29 +44,32 @@ Window {
         Rectangle {
             anchors.bottom: search_bar.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin: 0
             width: search_bar.width
             height: 1.5
+            visible: search_bar.visible
+            opacity: search_bar.opacity
         }
-        TextInput {
+        TextInput { // Label's text has a locaion error
             id: text_mask
             anchors.fill: search_bar
             text: qsTr("搜索")
-            font.pixelSize: 24
-            readOnly: true
-            visible: (search_bar.text == "")
+            font.pointSize: 18
             color: "#bbbbbb"
+            visible: search_bar.length === 0
+            opacity: search_bar.opacity
+            readOnly: true
+            enabled: false
         }
         TextInput {
             id: search_bar
             anchors.horizontalCenter: parent.horizontalCenter
-            y: 10
+            anchors.verticalCenter: parent.verticalCenter
             width: parent.width*0.6
-            height: 30
+            height: text_mask.contentHeight
+            font.pointSize: 18
             color: "#ffffff"
             clip: true
-            text: ""
-            font.pixelSize: 24
+            Behavior on opacity { SmoothedAnimation { duration: 100; velocity: -1 } }
         }
     }
     Drawer {
@@ -84,13 +88,12 @@ Window {
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 text: "\u2190"
-                font.pixelSize: 20
+                font.pointSize: 22
                 onReleased: side_drawer.close()
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: 23
                 text: qsTr("设置")
             }
         }
@@ -157,7 +160,6 @@ Window {
         anchors.bottomMargin: 0
         width: parent.width
         height: 50
-        Material.primary: Material.Red
         background.rotation: 180 //I just want to turn the shade upside down
     }
     StackView {
@@ -165,12 +167,8 @@ Window {
         y: top_toolbar.height
         width: window.width
         height: window.height-top_toolbar.height-bottom_toolbar.height
-
         anchors.horizontalCenter: parent.horizontalCenter
-
         Component.onCompleted: push(home_page)
-
-
     }
     Component {
         id: home_page
@@ -178,7 +176,10 @@ Window {
     }
     Component {
         id: login_page
-        Login_Page {}
+        Login_Page {
+            Component.onCompleted: {search_bar.opacity = 0; search_bar.enabled = false}
+            Component.onDestruction: {search_bar.enabled = true; search_bar.opacity = 1}
+        }
     }
 
 

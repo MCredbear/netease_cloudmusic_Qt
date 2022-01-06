@@ -1,8 +1,8 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.12
-import QtQuick.Controls.impl 2.12
-import QtQuick.Controls.Material 2.3
-import QtQuick.Controls.Material.impl 2.12
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.impl 2.15
+import QtQuick.Controls.Material 2.15
+import QtQuick.Controls.Material.impl 2.15
 
 Item {
 
@@ -69,7 +69,7 @@ Item {
                     y: x
                     width: side_drawer.width/3.14
                     height: width
-                    source: "http://himg.bdimg.com/sys/portrait/item/public.1.27f909f0.lizX-dyS3heXvAIwZYEXdw.jpg"
+                    source: "image/image/unlogined.svg"
                     fillMode: Image.PreserveAspectCrop
                 }
                 Text {
