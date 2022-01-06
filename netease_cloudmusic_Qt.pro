@@ -1,5 +1,5 @@
 QT += quick quickcontrols2 svg network
-
+android: QT += androidextras
 CONFIG += c++11 #qtquickcompiler
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -13,6 +13,7 @@ SOURCES += \
         lyric.cpp \
         main.cpp \
         crypto/weapi.cpp \
+        permissions.cpp \
         song_detail.cpp
 
 RESOURCES += qml.qrc \
@@ -58,6 +59,7 @@ HEADERS += \
     login_cellphone.h \
     login_qr.h \
     lyric.h \
+    permissions.h \
     song_detail.h
 
 
