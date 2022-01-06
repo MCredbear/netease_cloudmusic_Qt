@@ -13,8 +13,40 @@
 #include "login_qr.h"
 #include "lyric.h"
 
+#ifdef Q_OS_ANDROID
+#include <QtAndroid>
+bool checkPermission() {
+    QtAndroid::PermissionResult r = QtAndroid::checkPermission("android.permission.WRITE_EXTERNAL_STORAGE");
+    if(r == QtAndroid::PermissionResult::Denied) {
+        QtAndroid::requestPermissionsSync( QStringList() << "android.permission.WRITE_EXTERNAL_STORAGE" );
+        r = QtAndroid::checkPermission("android.permission.WRITE_EXTERNAL_STORAGE");
+        if(r == QtAndroid::PermissionResult::Denied) {
+            return false;
+        }
+    }
+    return true;
+}
+bool checkPermission2() {
+    QtAndroid::PermissionResult r = QtAndroid::checkPermission("android.permission.READ_EXTERNAL_STORAGE");
+    if(r == QtAndroid::PermissionResult::Denied) {
+        QtAndroid::requestPermissionsSync( QStringList() << "android.permission.READ_EXTERNAL_STORAGE" );
+        r = QtAndroid::checkPermission("android.permission.READ_EXTERNAL_STORAGE");
+        if(r == QtAndroid::PermissionResult::Denied) {
+            return false;
+        }
+    }
+    return true;
+}
+#endif
+
 int main(int argc, char *argv[])
 {
+
+#ifdef Q_OS_ANDROID
+    checkPermission();
+    checkPermission2();
+#endif
+
     QQuickStyle::setStyle("Material");
     QQuickWindow::setSceneGraphBackend(QSGRendererInterface::VulkanRhi);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -23,7 +55,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    login_cellphone login;
+    login_cellphone login_cellphone;
     login_qr login_qr;
     lyric lyric;
 
@@ -39,7 +71,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty("login",&login);
+    engine.rootContext()->setContextProperty("login_cellphone",&login_cellphone);
     engine.rootContext()->setContextProperty("lyric",&lyric);
     engine.rootContext()->setContextProperty("login_qr",&login_qr);
 
