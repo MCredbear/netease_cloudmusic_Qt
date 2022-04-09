@@ -4,18 +4,22 @@
 #include <QNetworkReply>
 #include <QEventLoop>
 #include <QDebug>
-#include "crypto/weapi.h"
+#include "crypto/linuxapi.h"
 
 QByteArray loginQRKey() // from https://github.com/binaryify/NeteaseCloudMusicApi/module/login_qr_key.js
 {
+    const QByteArray url = "https://music.163.com/weapi/login/qrcode/unikey";
     QNetworkAccessManager manager;
     QNetworkRequest request;
     QEventLoop eventloop;
-    request.setUrl(QUrl("https://music.163.com/weapi/login/qrcode/unikey"));
+    request.setUrl(linuxUrl);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-    QByteArray postdata;
-    postdata.append("params=" + weapi::params("{\"type\":1}") + "&");
-    postdata.append("encSecKey=" + weapi::encSecKey());
+    QByteArray postdata = "{\"type\":1}";
+    /*
+    {
+        "type":1
+    }
+    */
     QNetworkReply *reply = manager.post(request, postdata);
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
     eventloop.exec();

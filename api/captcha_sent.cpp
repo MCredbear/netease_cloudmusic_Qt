@@ -4,19 +4,25 @@
 #include <QNetworkReply>
 #include <QEventLoop>
 #include <QDebug>
-#include "crypto/weapi.h"
+#include "crypto/linuxapi.h"
 
 QByteArray captchaSent(QByteArray countrycode, QByteArray phone) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/captcha_sent.js
 {
+    const QByteArray url = "https://music.163.com/api/sms/captcha/sent";
     QNetworkAccessManager manager;
     QNetworkRequest request;
     QEventLoop eventloop;
-    request.setUrl(QUrl("https://music.163.com/api/sms/captcha/sent"));
+    request.setUrl(linuxUrl);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-    QByteArray postdata;
-    postdata.append("params=" + weapi::params("{\"ctcode\":\"" + countrycode + "\",\"cellphone\":\"" + phone + "\"}") + "&");
-    postdata.append("encSecKey=" + weapi::encSecKey());
-    QNetworkReply *reply = manager.post(request, postdata);
+    QByteArray postData = "{\"ctcode\":\"" + countrycode + "\",\"cellphone\":\"" + phone + "\"}";
+    /*
+    {
+        "ctcode":"$countrycode",
+        "cellphone":"$phone"
+    }
+    */
+    postData = linuxapi(url, postData);
+    QNetworkReply *reply = manager.post(request, postData);
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
     eventloop.exec();
     return reply->readAll();

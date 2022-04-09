@@ -50,10 +50,10 @@ QByteArray loginCellphoneWithCaptcha(QByteArray countrycode, QByteArray phone, Q
     QByteArray postData = "{\"phone\":\"" + phone + "\",\"countrycode\":\"" + countrycode + "\",\"captcha\":\"" + captcha + "\",\"rememberLogin\":\"true\"}";
     /*
     {
-          "phone":"$cellphone",
-          "countrycode":"$countrycode",
-          "captcha":"$captcha",
-          "rememberLogin":"true"
+        "phone":"$cellphone",
+        "countrycode":"$countrycode",
+        "captcha":"$captcha",
+        "rememberLogin":"true"
     }
     */
     postData = linuxapi(url, postData);

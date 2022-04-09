@@ -32,7 +32,7 @@ CONFIG += embed_translations
 
 include(statusbar/src/statusbar.pri)
 
-!android: LIBS += -lcrypto
+#!android: LIBS += -lcrypto
 android: include(/home/redbear/android-sdk-linux/android_openssl/openssl.pri)   # Qt's support for Android is still too poor
 android: LIBS+= /home/redbear/android-sdk-linux/android_openssl/no-asm/latest/arm64/libcrypto.so.
 android: INCLUDEPATH += /home/redbear/android-sdk-linux/android_openssl/static/include/
