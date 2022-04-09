@@ -61,13 +61,20 @@ Popup {
             height: 50
             text: qsTr("登录")
             onReleased: {
-//                login_cellphone.withPassword("86", account_input.text, password_input.text)
-//                account_input.text = ""
-//                password_input.text = ""
-//                this.focus = false
-//                login_page.focus = false
-                //console.log(neteaseAPI.loginCellphone("86", account_input.text, password_input.text))
-                console.log(neteaseAPI.userAccount())
+                neteaseAPI.loginCellphone("86", account_input.text, password_input.text)
+                var userAccount = neteaseAPI.userAccount()
+                if (userAccount !== "") {
+                    account_input.text = ""
+                    password_input.text = ""
+                    login_page.close()
+                    var json = JSON.parse(userAccount)
+                    userProfile = {
+                        logined : true,
+                        id : json.profile.userId.toString(),
+                        name : json.profile.nickname,
+                        avatarUrl : json.profile.avatarUrl
+                    }
+                }
             }
         }
     }

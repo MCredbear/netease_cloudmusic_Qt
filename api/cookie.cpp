@@ -10,7 +10,6 @@ void readCookie()
     cookieFile.open(QIODevice::ReadWrite);
     cookie = cookieFile.readAll();
     cookie = cookie.mid(0,cookie.length()-1); //不知道为什么结尾会多出来一个换行符
-    qDebug()<<cookie;
     cookieFile.close();
 }
 

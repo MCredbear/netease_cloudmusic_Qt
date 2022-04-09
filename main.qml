@@ -3,7 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.15
 
-//qml files in the same qrc directory needn't(shouldn't) import
+
 
 Window {
     id: window
@@ -12,6 +12,27 @@ Window {
     visible: true // @disable-check M16
     title: qsTr("网易云音乐")  // @disable-check M16
     color: "#eeeeee"
+
+    Component.onCompleted: {
+        var userAccount = neteaseAPI.userAccount()
+        if (userAccount !== "") {
+            var json = JSON.parse(userAccount)
+            userProfile = {
+                logined : true,
+                id : json.profile.userId.toString(),
+                name : json.profile.nickname,
+                avatarUrl : json.profile.avatarUrl
+            }
+        }
+    }
+
+    property var userProfile : {
+        'logined': false,
+        'name': "",
+        'id': "",
+        'avatarUrl': ""
+    } //与js不同，这不是键值对
+
     DropShadow {
         z: 9
         anchors.fill: top_toolbar
@@ -86,14 +107,28 @@ Window {
                 id: left_column
                 width: parent.width
                 height: children.height
-                Button {
+                Rectangle {
                     width: parent.width
                     height: 50
-                    text: qsTr("登录")
-                    onReleased: {
-                        login_page.open()
+                    Button {
+                        anchors.fill: parent
+                        visible: !userProfile.logined
+                        text: qsTr("登录")
+                        onReleased: {
+                            login_page.open()
+                        }
+                    }
+                    Image {
+                        id: avatar
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 50
+                        height: 50
+                        source: userProfile.avatarUrl
                     }
                 }
+
+
 
                 Rectangle {
                     width: parent.width
