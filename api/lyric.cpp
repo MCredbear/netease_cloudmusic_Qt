@@ -5,13 +5,7 @@
 #include <QEventLoop>
 #include <QDebug>
 
-lyric::lyric(QObject *parent) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/lyric.js
-    : QObject{parent}
-{
-
-}
-
-QByteArray lyric::getLyric(QByteArray id)
+QByteArray getLyric(QByteArray id) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/lyric.js
 {
     QNetworkAccessManager manager;
     QNetworkRequest request;
@@ -21,7 +15,7 @@ QByteArray lyric::getLyric(QByteArray id)
     QByteArray postdata;
     postdata.append("id=" + id);
     QNetworkReply *reply = manager.post(request, postdata);
-    connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
+    QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
     eventloop.exec();
     return reply->readAll();
 }

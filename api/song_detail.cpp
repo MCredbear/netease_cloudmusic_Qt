@@ -6,13 +6,7 @@
 #include <QEventLoop>
 #include <QDebug>
 
-song_detial::song_detial(QObject *parent) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/song_detial.js
-    : QObject{parent}
-{
-
-}
-
-QByteArray song_detial::getSong_detail(QByteArray id)
+QByteArray songDetail(QByteArray id) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/song_detial.js
 {
     QNetworkAccessManager manager;
     QNetworkRequest request;

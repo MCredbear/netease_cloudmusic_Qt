@@ -8,19 +8,29 @@ CONFIG += c++11 #qtquickcompiler
 
 SOURCES += \
         Qt-AES/qaesencryption.cpp \
-        login_cellphone.cpp \
-        login_qr.cpp \
-        lyric.cpp \
+        api/captcha_sent.cpp \
+        api/captcha_verify.cpp \
+        api/cookie.cpp \
+        api/login_cellphone.cpp \
+        api/login_qr_key.cpp \
+        api/lyric.cpp \
+        api/crypto/weapi.cpp \
+        api/crypto/linuxapi.cpp \
+        api/neteaseAPI.cpp \
+        api/record_recent_song.cpp \
+        api/song_detail.cpp \
+        api/user_account.cpp \
         main.cpp \
-        crypto/weapi.cpp \
-        permissions.cpp \
-        song_detail.cpp
+        permissions.cpp
+
 
 RESOURCES += qml.qrc \
              image.qrc
 
 CONFIG += lrelease
 CONFIG += embed_translations
+
+include(statusbar/src/statusbar.pri)
 
 !android: LIBS += -lcrypto
 android: include(/home/redbear/android-sdk-linux/android_openssl/openssl.pri)   # Qt's support for Android is still too poor
@@ -55,11 +65,18 @@ HEADERS += \
     Qt-AES/aesni/aesni-enc-ecb.h \
     Qt-AES/aesni/aesni-key-exp.h \
     Qt-AES/qaesencryption.h \
-    crypto/weapi.h \
-    login_cellphone.h \
-    login_qr.h \
-    lyric.h \
-    permissions.h \
-    song_detail.h
-
+    api/cache.h \
+    api/captcha_sent.h \
+    api/captcha_verify.h \
+    api/cookie.h \
+    api/crypto/linuxapi.h \
+    api/crypto/weapi.h \
+    api/login_cellphone.h \
+    api/login_qr_key.h \
+    api/lyric.h \
+    api/neteaseAPI.h \
+    api/record_recent_song.h \
+    api/song_detail.h \
+    api/user_account.h \
+    permissions.h
 

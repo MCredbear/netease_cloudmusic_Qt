@@ -1,3 +1,6 @@
 [submodule "Qt-AES"]
 	path = Qt-AES
 	url = https://github.com/bricke/Qt-AES
+[submodule "statusbar"]
+	path = statusbar
+	url = https://github.com/jpnurmi/statusbar

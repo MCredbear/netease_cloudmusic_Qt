@@ -8,10 +8,14 @@
 #include <QTranslator>
 #include <QSGRendererInterface>
 #include <QQuickWindow>
+#include <QNetworkDiskCache>
+#include <QQmlNetworkAccessManagerFactory>
+#include <QNetworkAccessManager>
 
-#include "login_cellphone.h"
-#include "login_qr.h"
-#include "lyric.h"
+#include "statusbar.h"
+
+#include "api/neteaseAPI.h"
+#include "api/cookie.h"
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroid>
@@ -39,25 +43,38 @@ bool checkPermission2() {
 }
 #endif
 
+class CachingNetworkAccessManagerFactory : public QQmlNetworkAccessManagerFactory //QML网络缓存
+{
+public:
+    virtual QNetworkAccessManager *create(QObject *parent)
+    {
+        QNetworkAccessManager *nam = new QNetworkAccessManager(parent);
+        QNetworkDiskCache* diskCache = new QNetworkDiskCache(nam);
+        diskCache->setCacheDirectory("./cache/");
+        diskCache->setMaximumCacheSize(500 * 1024 * 1024); //单位：B
+        nam->setCache(diskCache);
+        return nam;
+    }
+};
+
 int main(int argc, char *argv[])
 {
-
 #ifdef Q_OS_ANDROID
     checkPermission();
     checkPermission2();
 #endif
 
-    QQuickStyle::setStyle("Material");
-    QQuickWindow::setSceneGraphBackend(QSGRendererInterface::VulkanRhi);
+    //QQuickStyle::setStyle("Material");
+    //QQuickWindow::setSceneGraphBackend(QSGRendererInterface::VulkanRhi);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
     QGuiApplication app(argc, argv);
 
-    login_cellphone login_cellphone;
-    login_qr login_qr;
-    lyric lyric;
+    CachingNetworkAccessManagerFactory QMLNetworkAccessManagerFactory;
+
+    neteaseAPI api;
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -71,15 +88,15 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty("login_cellphone",&login_cellphone);
-    engine.rootContext()->setContextProperty("lyric",&lyric);
-    engine.rootContext()->setContextProperty("login_qr",&login_qr);
+    engine.rootContext()->setContextProperty("neteaseAPI", &api);
+    engine.setNetworkAccessManagerFactory(&QMLNetworkAccessManagerFactory);
 
 #ifndef Q_OS_ANDROID
     const QUrl url(QStringLiteral("qrc:/main.qml"));
 #endif
 
 #ifdef Q_OS_ANDROID
+    //const QUrl url(QStringLiteral("qrc:/main.qml"));
     const QUrl url(QStringLiteral("/sdcard/main.qml")); // for debug
 #endif
 

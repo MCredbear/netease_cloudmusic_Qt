@@ -1,1 +1,49 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1637423284845" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7821" data-darkreader-inline-fill="" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M983.04 603.41248a242.48832 242.48832 0 0 0-280.39168-238.40768 253.32224 253.32224 0 0 0-446.42816-77.824 249.13408 249.13408 0 0 0-48.95744 153.38496A203.39712 203.39712 0 0 0 240.18944 844.8h527.77472a31.98976 31.98976 0 0 0 14.75072-3.71712A242.03776 242.03776 0 0 0 983.04 603.41248z m-242.432 177.30048H240.18944a139.38688 139.38688 0 1 1 0-278.76864 31.96928 31.96928 0 0 0 8.704-1.34144 31.96416 31.96416 0 0 0 24.84736-35.99872 187.81184 187.81184 0 0 1 157.74208-214.016A188.46208 188.46208 0 0 1 641.024 383.42656a241.62816 241.62816 0 0 0-142.848 219.98592 32.1792 32.1792 0 0 0 64.3584 0 178.06848 178.06848 0 1 1 178.0736 177.30048z" fill="#333333" p-id="7822" style="--darkreader-inline-fill: #262a2b;" data-darkreader-inline-fill=""></path></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   t="1637423284845"
+   class="icon"
+   viewBox="0 0 1024 1024"
+   version="1.1"
+   p-id="7821"
+   data-darkreader-inline-fill=""
+   width="200"
+   height="200"
+   id="svg8"
+   sodipodi:docname="clouddrive_music_icon.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="3.92"
+     inkscape:cx="99.872449"
+     inkscape:cy="100.12755"
+     inkscape:window-width="1920"
+     inkscape:window-height="983"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <defs
+     id="defs4">
+    <style
+       type="text/css"
+       id="style2" />
+  </defs>
+  <path
+     d="M983.04 603.41248a242.48832 242.48832 0 0 0-280.39168-238.40768 253.32224 253.32224 0 0 0-446.42816-77.824 249.13408 249.13408 0 0 0-48.95744 153.38496A203.39712 203.39712 0 0 0 240.18944 844.8h527.77472a31.98976 31.98976 0 0 0 14.75072-3.71712A242.03776 242.03776 0 0 0 983.04 603.41248z m-242.432 177.30048H240.18944a139.38688 139.38688 0 1 1 0-278.76864 31.96928 31.96928 0 0 0 8.704-1.34144 31.96416 31.96416 0 0 0 24.84736-35.99872 187.81184 187.81184 0 0 1 157.74208-214.016A188.46208 188.46208 0 0 1 641.024 383.42656a241.62816 241.62816 0 0 0-142.848 219.98592 32.1792 32.1792 0 0 0 64.3584 0 178.06848 178.06848 0 1 1 178.0736 177.30048z"
+     fill="#333333"
+     p-id="7822"
+     style="fill:#000000"
+     data-darkreader-inline-fill=""
+     id="path6" />
+</svg>
