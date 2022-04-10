@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>LeftColumnButton.qml</file>
         <file>LoginPage.qml</file>
+        <file>BottomToolbar.qml</file>
+        <file>TopToolbar.qml</file>
+        <file>BannedToast.qml</file>
     </qresource>
 </RCC>

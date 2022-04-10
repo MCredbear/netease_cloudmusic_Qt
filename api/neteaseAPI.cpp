@@ -10,6 +10,7 @@
 #include "record_recent_song.h"
 #include "song_detail.h"
 #include "user_account.h"
+#include "user_playlist.h"
 
 neteaseAPI::neteaseAPI(QObject *parent)
     : QObject{parent}
@@ -29,6 +30,18 @@ QByteArray neteaseAPI::loginCellphone(QByteArray countrycode, QByteArray phone, 
 {
     return ::loginCellphoneWithPassword(countrycode, phone, password);
 }
+QByteArray neteaseAPI::loginQRKey()
+{
+    return ::loginQRKey();
+}
+QByteArray neteaseAPI::lyric(QByteArray id)
+{
+    return ::lyric(id);
+}
+QByteArray neteaseAPI::playlistDetail(QByteArray id)
+{
+    return ::playlistDetail(id);
+}
 QByteArray neteaseAPI::recordRecentSong(QByteArray limit)
 {
     return ::recordRecentSong(limit);
@@ -37,7 +50,15 @@ QByteArray neteaseAPI::songDetail(QByteArray id)
 {
     return ::songDetail(id);
 }
+QByteArray neteaseAPI::songUrl(QByteArray id)
+{
+    return ::songUrl(id);
+}
 QByteArray neteaseAPI::userAccount()
 {
     return ::userAccount();
+}
+QByteArray neteaseAPI::userPlaylist(QByteArray id)
+{
+    return ::userPlaylist(id);
 }

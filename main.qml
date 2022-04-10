@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import QtMultimedia 5.15
 import QtGraphicalEffects 1.15
 
 
@@ -33,76 +34,151 @@ Window {
         'avatarUrl': ""
     } //与js不同，这不是键值对
 
-    DropShadow {
-        z: 9
-        anchors.fill: top_toolbar
-        source: top_toolbar
-        samples: radius*2
-        radius: 40
-        spread: 0.1
-        color: "#000000"
+    Audio {
+        id: player
     }
-    ToolBar {
+
+//    DropShadow {
+//        z: 9
+//        anchors.fill: top_toolbar
+//        source: top_toolbar
+//        samples: radius*2
+//        radius: 40
+//        spread: 0.1
+//        color: "#000000"
+//    } 节约内（显）存，换成一条线罢
+    Rectangle {
+        z: 11
+        anchors.bottom: top_toolbar.bottom
+        width: top_toolbar.width
+        height: 3
+        color: "red"
+    }
+
+    TopToolbar {
         id: top_toolbar
-        z: 10
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        width: parent.width
-        height: 80
-        background: Rectangle {
-            color: "#ffffff"
-        }
-        Image {
-            id: icon
-            width: 72
-            height: 72
-            anchors.verticalCenter: parent.verticalCenter
-            source: "images/netease-cloud-music.svg"
-            Label {
-                anchors.left: parent.right
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 4
-                text: qsTr("网易云音乐")
-                font.pointSize: 20
-            }
-        }
-        Rectangle {
-            anchors.bottom: icon.bottom
-            anchors.bottomMargin: 4
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: window.width/5
-            height: text_mask.contentHeight
-            radius: 4
-            color: "#dddddd"
-            TextInput {
-                id: search_input
-                anchors.fill: parent
-                font.pointSize: 18
-                clip: true
-            }
-            TextInput { // Label's text has a position error
-                id: text_mask
-                anchors.fill: search_input
-                text: qsTr("搜索")
-                font.pointSize: 18
-                color: "#bbbbbb"
-                visible: search_input.length === 0 ? search_input.focus ? true : true : false
-                readOnly: true
-                enabled: false
-            }
-        }
     }
 
     Rectangle {
+        id: playlistPage
+        anchors.left: leftListView.right
+        anchors.right: parent.right
+        anchors.top: top_toolbar.bottom
+        anchors.bottom: bottom_toolbar.top
+        color: "grey"
+        Rectangle {
+            id: playlistInformation
+            anchors.top: parent.top
+            width: parent.width
+            height: 100
+            color: "white"
+            Text {
+                id: playlistName
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                font.pointSize: 20
+            }
+        }
+        ListView {
+            id: playlistView
+            anchors.top: playlistInformation.bottom
+            anchors.bottom: parent.bottom
+            width: parent.width
+            clip: true
+            model: ListModel {
+                id: playlist
+            }
+            delegate: MouseArea {
+                width: playlistView.width
+                height: 30
+                onReleased: {
+                    var songUrl = neteaseAPI.songUrl(id)
+                    if (songUrl !== "") {
+                        var json = JSON.parse(songUrl)
+                        if (json.code === 500) {
+                            bannedToast.open()
+                        }
+                        else {
+                            player.source = json.data[0].url
+                            player.play()
+                        }
+                    }
+                }
+
+                Text {
+                    id: songName
+                    anchors.left: parent.left
+                    anchors.leftMargin: 10
+                    text: name
+                }
+                Text {
+                    id: songAlia
+                    anchors.left: songName.right
+                    anchors.leftMargin: 2
+                    text: alia
+                }
+                Text {
+                    id: songArtist
+                    anchors.left: songAlia.right
+                    anchors.leftMargin: 5
+                    text: artist
+                }
+                Text {
+                    id: songAlbum
+                    anchors.left: songArtist.right
+                    anchors.leftMargin: 2
+                    text: album
+                }
+            }
+        }
+
+    }
+
+    Rectangle {
+        id: leftListView
         anchors.left: parent.left
         anchors.top: top_toolbar.bottom
         anchors.bottom: bottom_toolbar.top
         width: window.width/5
+        Rectangle {
+            z: 3
+            anchors.right: parent.right
+            width: 3
+            height: parent.height
+            color: "red"
+        }
+
         Flickable {
             anchors.fill: parent
-            contentHeight: left_column.height
+            contentHeight: 50 + myPlaylistView.contentHeight + subscribedPlaylistView.contentHeight
             contentWidth: width
-
+            Component.onCompleted: {
+                var userPlaylist = neteaseAPI.userPlaylist(userProfile.id)
+                if (userPlaylist !== "") {
+                    var json = JSON.parse(userPlaylist)
+                    var playlists = json.playlist
+                    for (var playlist in playlists) {
+                        if (!playlists[playlist].subscribed) {
+                            myPlaylist.append(
+                                        {
+                                            "id": playlists[playlist].id,
+                                            "name": playlists[playlist].name,
+                                            "coverUrl": playlists[playlist].coverImgUrl
+                                        }
+                            )
+                        }
+                        else {
+                            subscribedPlaylist.append(
+                                        {
+                                            "id": playlists[playlist].id,
+                                            "name": playlists[playlist].name,
+                                            "coverUrl": playlists[playlist].coverImgUrl
+                                        }
+                            )
+                        }
+                    }
+                }
+            }
             Column {
                 id: left_column
                 width: parent.width
@@ -126,97 +202,149 @@ Window {
                         height: 50
                         source: userProfile.avatarUrl
                     }
+                    Text {
+                        id: user_name_text
+                        anchors.left: avatar.right
+                        anchors.leftMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: userProfile.name
+                    }
                 }
 
-
-
-                Rectangle {
+                ListView {
+                    id: myPlaylistView
                     width: parent.width
-                    height: 100
-                    color: "#00000000"
-                }
-                LeftColumnButton {
+                    height: model.count * 50
+                    interactive: false
+                    model: ListModel {
+                        id: myPlaylist
+                    }
+                    delegate: MouseArea {
+                        width: parent.width
+                        height: 50
+                        onReleased: {
+                            playlistName.text = name
+                            playlist.clear()
+                            var playlistDetail = neteaseAPI.playlistDetail(id)
+                            if (playlistDetail !== "") {
+                                var json = JSON.parse(playlistDetail)
+                                var tracks = json.playlist.tracks
+                                for (var song in tracks) {
+                                    var _id = tracks[song].id
+                                    var _name = tracks[song].name
+                                    var artist = ""
+                                    for (var _artist in tracks[song].ar) artist += "/" + tracks[song].ar[_artist].name
+                                    artist = artist.substr(1)
+                                    var alia = ""
+                                    for (var _alia in tracks[song].alia) alia += tracks[song].alia[_alia]
+                                    if (tracks[song].hasOwnProperty("tns"))
+                                        for (var tn in tracks[song].tns) alia +=  tracks[song].tns[tn]
+                                    var album = tracks[song].al.name
+                                    playlist.append(
+                                                {
+                                                    "id": _id,
+                                                    "name": _name,
+                                                    "artist": artist,
+                                                    "alia": alia,
+                                                    "album": album
+                                                }
+                                    )
+                                }
+                            }
+                        }
 
+//                        Image {
+//                            anchors.left: parent.left
+//                            anchors.verticalCenter: parent.verticalCenter
+//                            width: 50
+//                            height: 50
+//                            source: coverUrl
+//                        }
+                        Text {
+                            anchors.left: parent.left
+                            anchors.leftMargin: 10
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width - 10
+                            height: 50
+                            wrapMode: Text.WordWrap
+                            text: name
+                        }
+                    }
+                }
+                ListView {
+                    id: subscribedPlaylistView
+                    width: parent.width
+                    height: model.count * 50
+                    interactive: false
+                    model: ListModel {
+                        id: subscribedPlaylist
+                    }
+                    delegate: MouseArea {
+                        width: parent.width
+                        height: 50
+                        onReleased: {
+                            playlistName.text = name
+                            playlist.clear()
+                            var playlistDetail = neteaseAPI.playlistDetail(id)
+                            if (playlistDetail !== "") {
+                                var json = JSON.parse(playlistDetail)
+                                var tracks = json.playlist.tracks
+                                for (var song in tracks) {
+                                    var _id = tracks[song].id
+                                    var _name = tracks[song].name
+                                    var artist = ""
+                                    for (var _artist in tracks[song].ar) artist += "/" + tracks[song].ar[_artist].name
+                                    artist = artist.substr(1)
+                                    var alia = ""
+                                    for (var _alia in tracks[song].alia) alia += tracks[song].alia[_alia]
+                                    if (tracks[song].hasOwnProperty("tns"))
+                                        for (var tn in tracks[song].tns) alia +=  tracks[song].tns[tn]
+                                    var album = tracks[song].al.name
+                                    playlist.append(
+                                                {
+                                                    "id": _id,
+                                                    "name": _name,
+                                                    "artist": artist,
+                                                    "alia": alia,
+                                                    "album": album
+                                                }
+                                    )
+                                }
+                            }
+                        }
+
+//                        Image {
+//                            anchors.left: parent.left
+//                            anchors.verticalCenter: parent.verticalCenter
+//                            width: 50
+//                            height: 50
+//                            source: coverUrl
+//                        }
+                        Text {
+                            anchors.left: parent.left
+                            anchors.leftMargin: 10
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width - 10
+                            height: 50
+                            wrapMode: Text.WordWrap
+                            text: name
+                        }
+                    }
                 }
             }
         }
     }
-    ToolBar {
+    BottomToolbar {
         id: bottom_toolbar
-        z: 10
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        width: parent.width
-        height: 80
-        background: Rectangle {
-            color: "#ffffff"
-        }
-        Rectangle {
-            anchors.top: parent.top
-            width: parent.width
-            height: 3
-            color: "red"
-        }
-        Button {
-            id: play_button
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            width: 40
-            height: 40
-            text: "play"
-        }
-        Button {
-            id: previous_button
-            anchors.right: play_button.left
-            anchors.rightMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            width: 40
-            height: 40
-            text: "pre"
-        }
-        Button {
-            id: next_button
-            anchors.left: play_button.right
-            anchors.leftMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            width: 40
-            height: 40
-            text: "next"
-        }
-        Button {
-            id: playlist_button
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            width: 40
-            height: 40
-            text: "repeat"
-        }
-        Button {
-            id: repeat_method_button
-            anchors.right: playlist_button.left
-            anchors.rightMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            width: 40
-            height: 40
-            text: "playlist"
-        }
-        Text {
-            id: song_name_text
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            text: "Name"
-        }
-        Text {
-            id: artist_name_text
-            anchors.left: song_name_text.left
-            anchors.top: song_name_text.bottom
-            text: "artist"
-        }
     }
+
     LoginPage {
         id: login_page
+        x: (window.width-width)/2
+        y: (window.height-height)/2
+    }
+    BannedToast {
+        id: bannedToast
         x: (window.width-width)/2
         y: (window.height-height)/2
     }

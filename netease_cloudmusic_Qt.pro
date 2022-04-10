@@ -1,4 +1,4 @@
-QT += quick quickcontrols2 svg network
+QT += quick quickcontrols2 svg network multimedia
 android: QT += androidextras
 CONFIG += c++11 #qtquickcompiler
 
@@ -17,9 +17,12 @@ SOURCES += \
         api/crypto/weapi.cpp \
         api/crypto/linuxapi.cpp \
         api/neteaseAPI.cpp \
+        api/playlist_detail.cpp \
         api/record_recent_song.cpp \
         api/song_detail.cpp \
+        api/song_url.cpp \
         api/user_account.cpp \
+        api/user_playlist.cpp \
         main.cpp \
         permissions.cpp
 
@@ -77,6 +80,9 @@ HEADERS += \
     api/neteaseAPI.h \
     api/record_recent_song.h \
     api/song_detail.h \
+    api/song_url.h \
     api/user_account.h \
+    api/user_playlist.h \
+    api/playlist_detail.h \
     permissions.h
 

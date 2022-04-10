@@ -8,9 +8,12 @@
 #include "login_cellphone.h"
 #include "login_qr_key.h"
 #include "lyric.h"
+#include "playlist_detail.h"
 #include "record_recent_song.h"
 #include "song_detail.h"
+#include "song_url.h"
 #include "user_account.h"
+#include "user_playlist.h"
 
 class neteaseAPI : public QObject
 {
@@ -21,9 +24,14 @@ public:
     Q_INVOKABLE QByteArray captchaSent(QByteArray countrycode, QByteArray phone);
     Q_INVOKABLE QByteArray captchaVerify(QByteArray countrycode, QByteArray phone, QByteArray captcha);
     Q_INVOKABLE QByteArray loginCellphone(QByteArray countrycode, QByteArray phone, QByteArray password); //暂时只用密码
+    Q_INVOKABLE QByteArray loginQRKey();
+    Q_INVOKABLE QByteArray lyric(QByteArray id);
+    Q_INVOKABLE QByteArray playlistDetail(QByteArray id);
     Q_INVOKABLE QByteArray recordRecentSong(QByteArray limit);
     Q_INVOKABLE QByteArray songDetail(QByteArray id);
+    Q_INVOKABLE QByteArray songUrl(QByteArray id);
     Q_INVOKABLE QByteArray userAccount();
+    Q_INVOKABLE QByteArray userPlaylist(QByteArray id);
 
 signals:
 

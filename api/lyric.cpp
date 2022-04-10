@@ -5,7 +5,7 @@
 #include <QEventLoop>
 #include <QDebug>
 
-QByteArray getLyric(QByteArray id) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/lyric.js
+QByteArray lyric(QByteArray id) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/lyric.js
 {
     QNetworkAccessManager manager;
     QNetworkRequest request;

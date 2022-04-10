@@ -1,23 +1,26 @@
-#include "song_detail.h"
+#include "song_url.h"
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QEventLoop>
 #include <QDebug>
 #include "crypto/linuxapi.h"
+#include "cookie.h"
 
-QByteArray songDetail(QByteArray id) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/song_detial.js
+QByteArray songUrl(QByteArray id)
 {
-    const QByteArray url = "https://music.163.com/api/v3/song/detail";
+    const QByteArray url = "https://interface3.music.163.com/api/song/enhance/player/url";
     QNetworkAccessManager manager;
     QNetworkRequest request;
     QEventLoop eventloop;
     request.setUrl(linuxUrl);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-    QByteArray postData = "{\"c\":\"[{\"id\":" + id + "}]\"}";
+    request.setRawHeader("Cookie", cookie);
+    QByteArray postData = "{\"ids\":\"[" + id + "]\",\"br\":999000}";
     /*
     {
-        "c":"[{"id":$id}]"
+        "ids":"[$id]",
+        "br":990000
     }
     */
     postData = linuxapi(url, postData);

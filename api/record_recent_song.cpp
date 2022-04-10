@@ -1,11 +1,11 @@
 #include "record_recent_song.h"
 #include <QNetworkAccessManager>
-#include <QNetworkCookieJar>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QEventLoop>
 #include <QDebug>
 #include "api/crypto/linuxapi.h"
+#include "cookie.h"
 
 QByteArray recordRecentSong(QByteArray limit) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/record_recent_song.js
 {
@@ -13,10 +13,9 @@ QByteArray recordRecentSong(QByteArray limit) // from https://github.com/binaryi
     QNetworkAccessManager manager;
     QNetworkRequest request;
     QEventLoop eventloop;
-    QNetworkCookieJar cookieJar;
-    manager.setCookieJar(&cookieJar);
     request.setUrl(linuxUrl);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+    request.setRawHeader("Cookie", cookie);
     QByteArray postData = "{\"limit\":" + limit + "}";
     /*
     {

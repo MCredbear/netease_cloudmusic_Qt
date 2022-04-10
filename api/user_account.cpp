@@ -2,10 +2,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <QNetworkCookieJar>
-#include <QNetworkCookie>
 #include <QEventLoop>
-#include <QCryptographicHash>
 #include <QDebug>
 #include "crypto/linuxapi.h"
 #include "cookie.h"
