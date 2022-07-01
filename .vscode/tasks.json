@@ -1,0 +1,76 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "create build Dir",
+            "command": "mkdir",
+            "args": [
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "create build Dir"
+        },
+        {
+            "type": "shell",
+            "label": "qmake  Debug",
+            "command": "/home/redbear/Qt/6.2.4/gcc_64/bin/qmake",
+            "args": [
+                "../netease_cloudmusic_Qt.pro",
+                "-spec",
+                "linux-g++",
+                "CONFIG+=debug",
+                "CONFIG+=qml_debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "qmake Debug"
+        },
+        {
+            "type": "shell",
+            "label": "make clean",
+            "command": "make",
+            "args": [
+                "clean",
+                "-j16"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "make clean"
+        },
+        {
+            "type": "shell",
+            "label": "make all",
+            "command": "make",
+            "args": [
+                "all",
+                "-j16"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": "make clean",
+            "detail": "make all"
+        }
+    ]
+}

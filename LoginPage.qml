@@ -62,6 +62,9 @@ Popup {
             onReleased: {
                 neteaseAPI.loginCellphone("86", account_input.text, password_input.text)
                 var userAccount = neteaseAPI.userAccount()
+                
+                console.log(userAccount)
+                
                 if (userAccount !== "") {
                     account_input.text = ""
                     password_input.text = ""

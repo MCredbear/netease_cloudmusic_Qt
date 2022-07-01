@@ -12,7 +12,9 @@
 #include <QQmlNetworkAccessManagerFactory>
 #include <QNetworkAccessManager>
 
+#ifdef Q_OS_ANDROID
 #include "statusbar.h"
+#endif
 
 #include "api/neteaseAPI.h"
 #include "api/cookie.h"

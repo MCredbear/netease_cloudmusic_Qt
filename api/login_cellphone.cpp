@@ -6,19 +6,20 @@
 #include <QCryptographicHash>
 #include <QDebug>
 #include "crypto/linuxapi.h"
+#include "crypto/weapi.h"
 #include "cookie.h"
 
 // from https://github.com/binaryify/NeteaseCloudMusicApi/module/login_cellphone
 
 
-
-QByteArray loginCellphoneWithPassword(QByteArray countrycode, QByteArray phone, QByteArray password)
+QByteArray loginCellphoneWithPassword(QByteArray countrycode, QByteArray phone, QByteArray password) //网易云NM$L，现在这个登录方法用不了了
 {
     const QByteArray url = "https://music.163.com/api/login/cellphone";
     QNetworkAccessManager manager;
     QNetworkRequest request;
     QEventLoop eventloop;
-    request.setUrl(linuxUrl);
+    // request.setUrl(linuxUrl);
+    request.setUrl(QUrl("https://music.163.com/weapi/login/cellphone"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
     request.setRawHeader("Cookie", "NMTID=; MUSIC_U=; __remember_me=true; os=pc"); //不知道为什么 setHeader(QNetworkRequest::CookieHeader, xxxxx) 会401
     password = QCryptographicHash::hash(password, QCryptographicHash::Md5).toHex();
@@ -36,6 +37,7 @@ QByteArray loginCellphoneWithPassword(QByteArray countrycode, QByteArray phone, 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
     eventloop.exec();
     writeCookie(manager.cookieJar()->cookiesForUrl(linuxUrl));
+    qDebug()<<QString::fromUtf8(reply->readAll());
     return reply->readAll();
 }
 
