@@ -57,6 +57,15 @@ Window {
         id: player
         audioOutput: AudioOutput {}
         loops: MediaPlayer.Infinite
+        onPositionChanged: {
+            if (player.playbackState == MediaPlayer.PlayingState)
+                for (var i = 0; i < lyricView.model.count; i++) {
+                    if (Math.trunc(lyricView.model.get(i).time / 500) === Math.trunc(player.position / 500)) {
+                        lyricView.currentIndex = i
+                        break
+                    }
+                }
+        }
     }
 
     Rectangle {
@@ -348,11 +357,14 @@ Window {
             anchors.fill: parent
             anchors.rightMargin: 40
             anchors.leftMargin: 40
+            spacing: 10
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            preferredHighlightBegin: height / 2
+            preferredHighlightEnd: height / 2
             property bool hasLyric: false
             property bool hasTranslatedLyric: false
             property bool hasRomanianLyric: false
             property bool autoScroll: false
-            spacing: 10
             model: ListModel {}
             delegate: Column {
                 id: lyricColumn
