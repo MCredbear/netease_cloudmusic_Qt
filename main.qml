@@ -194,7 +194,7 @@ Window {
                                     var result
                                     var originalLyricModel = originalLyric.split("\n")
                                     .filter(function(value){
-                                        return !(value.match(tiArAlByExpression) !== null | value.trim() === "")
+                                        return !(value.match(tiArAlByExpression) !== null | value.trim() === "" | ((value.match(lyricExpression) !== null) ? (value.match(lyricExpression)[4].trim() === "") : false))
                                     })
                                     .map(function(value){
 //                                        if ((result = value.match(lyricExpression)) !== null) {
@@ -207,13 +207,13 @@ Window {
                                     })
                                     var translatedLyricModel = translatedLyric.split("\n")
                                     .filter(function(value){
-                                        return !(value.match(tiArAlByExpression) !== null | value.trim() === "")
+                                        return !(value.match(tiArAlByExpression) !== null | value.trim() === "" | ((value.match(lyricExpression) !== null) ? (value.match(lyricExpression)[4].trim() === "") : false))
                                     })
                                     .map(function(value){
 //                                        if ((result = value.match(lyricExpression)) !== null) {
                                         result = value.match(lyricExpression)
                                             return {
-//                                                "time": Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000 + ((result[3].length > 2) ? Number(result[3]) : Number(result[3]) * 10),
+                                                "time": Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000 + ((result[3].length > 2) ? Number(result[3]) : Number(result[3]) * 10),
                                                 "translatedLyric": result[4]
                                             }
 //                                        }
@@ -222,29 +222,47 @@ Window {
                                         else lyricView.hasTranslatedLyric = false
                                     var romanianLyricModel = romanianLyric.split("\n")
                                     .filter(function(value){
-                                        return !(value.match(tiArAlByExpression) !== null | value.trim() === "")
+                                        return !(value.match(tiArAlByExpression) !== null | value.trim() === "" | ((value.match(lyricExpression) !== null) ? (value.match(lyricExpression)[4].trim() === "") : false))
                                     })
                                     .map(function(value){
 //                                        if ((result = value.match(lyricExpression)) !== null) {
                                         result = value.match(lyricExpression)
                                             return {
-//                                                "time": Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000 + ((result[3].length > 2) ? Number(result[3]) : Number(result[3]) * 10),
+                                                "time": Number(result[1]) * 60 * 1000 + Number(result[2]) * 1000 + ((result[3].length > 2) ? Number(result[3]) : Number(result[3]) * 10),
                                                 "romanianLyric": result[4]
                                             }
 //                                        }
                                     })
                                     if (romanianLyricModel.length > 0) lyricView.hasRomanianLyric = true
                                         else lyricView.hasRomanianLyric = false
-                                    lyricView.model.clear()
-                                    for (var i = 0; i < originalLyricModel.length; i++) {
-                                        lyricView.model.append({
-                                            "time": originalLyricModel[i].time,
-                                            "originalLyric": originalLyricModel[i].originalLyric,
-                                            "translatedLyric": lyricView.hasTranslatedLyric? translatedLyricModel[i].translatedLyric : "",
-                                            "romanianLyric": lyricView.hasRomanianLyric? romanianLyricModel[i].romanianLyric : ""
+                                    var lyricModel = []
+                                    for (var i in originalLyricModel) {
+                                        var _translatedLyric = ""
+                                        var _romanianLyric = ""
+                                        for (var j in translatedLyricModel) if (translatedLyricModel[j].time === originalLyricModel[i].time) {
+                                                                                                                                        _translatedLyric = translatedLyricModel[j].translatedLyric
+                                                                                                                                        break
+                                                                                                                                        }
+                                        for (var k in romanianLyricModel) if (romanianLyricModel[k].time === originalLyricModel[i].time) {
+                                                                                                                                        _romanianLyric = romanianLyricModel[k].romanianLyric
+                                                                                                                                        break
+                                                                                                                                        }
+                                        lyricModel.push({
+                                                        "time": originalLyricModel[i].time,
+                                                        "originalLyric": originalLyricModel[i].originalLyric,
+                                                        "translatedLyric": _translatedLyric,
+                                                        "romanianLyric": _romanianLyric
                                         })
                                     }
-
+                                    lyricView.model.clear()
+                                    for (var i in lyricModel) {
+                                        lyricView.model.append({
+                                            "time": lyricModel[i].time,
+                                            "originalLyric": lyricModel[i].originalLyric,
+                                            "translatedLyric": lyricView.hasTranslatedLyric? lyricModel[i].translatedLyric : "",
+                                            "romanianLyric": lyricView.hasRomanianLyric? lyricModel[i].romanianLyric : ""
+                                        })
+                                    }
                                 }
                             }
                         }
@@ -334,6 +352,7 @@ Window {
             property bool hasTranslatedLyric: false
             property bool hasRomanianLyric: false
             property bool autoScroll: false
+            spacing: 10
             model: ListModel {}
             delegate: Column {
                 id: lyricColumn
@@ -347,7 +366,7 @@ Window {
                     anchors.right: parent.right
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    lineHeight: 0.6
+                    lineHeight: 0.9
                     height: contentHeight
                     wrapMode: Text.WordWrap
                     font.pointSize: 10
@@ -360,7 +379,7 @@ Window {
                     anchors.right: parent.right
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    lineHeight: 0.6
+                    lineHeight: 0.9
                     height: contentHeight
                     wrapMode: Text.WordWrap
                     font.pointSize: 10
@@ -373,7 +392,7 @@ Window {
                     anchors.right: parent.right
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    lineHeight: 0.6
+                    lineHeight: 0.9
                     height: contentHeight
                     wrapMode: Text.WordWrap
                     font.pointSize: 10
