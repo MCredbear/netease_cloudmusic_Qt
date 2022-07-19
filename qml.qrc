@@ -5,5 +5,10 @@
         <file>BottomToolbar.qml</file>
         <file>TopToolbar.qml</file>
         <file>BannedToast.qml</file>
+        <file>MyPlaylistView.qml</file>
+        <file>SubscribedPlaylistView.qml</file>
+        <file>Material_Button.qml</file>
+        <file>Material_Image.qml</file>
+        <file>Material_Rectangle.qml</file>
     </qresource>
 </RCC>

@@ -7,6 +7,7 @@
 #include "captcha_verify.h"
 #include "login_cellphone.h"
 #include "login_qr_key.h"
+#include "login_qr_create.h"
 #include "lyric.h"
 #include "playlist_detail.h"
 #include "record_recent_song.h"
@@ -25,6 +26,7 @@ public:
     Q_INVOKABLE QByteArray captchaVerify(QByteArray countrycode, QByteArray phone, QByteArray captcha);
     Q_INVOKABLE QByteArray loginCellphone(QByteArray countrycode, QByteArray phone, QByteArray password); //暂时只用密码
     Q_INVOKABLE QByteArray loginQRKey();
+    Q_INVOKABLE QByteArray loginQRCreate(QByteArray key);
     Q_INVOKABLE QByteArray lyric(QByteArray id);
     Q_INVOKABLE QByteArray playlistDetail(QByteArray id);
     Q_INVOKABLE QByteArray recordRecentSong(QByteArray limit);

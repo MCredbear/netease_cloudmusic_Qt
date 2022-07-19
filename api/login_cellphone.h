@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-// from https://github.com/binaryify/NeteaseCloudMusicApi/module/login_cellphone
+// from https://github.com/binaryify/NeteaseCloudMusicApi/module/login_cellphone.js
 
 QByteArray loginCellphoneWithPassword(QByteArray countrycode, QByteArray phone, QByteArray password);
 

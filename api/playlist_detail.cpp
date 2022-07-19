@@ -7,7 +7,7 @@
 #include "crypto/linuxapi.h"
 #include "cookie.h"
 
-QByteArray playlistDetail(QByteArray id)
+QByteArray playlistDetail(QByteArray id) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/playlist_detail.js
 {
     const QByteArray url = "https://music.163.com/api/v6/playlist/detail";
     QNetworkAccessManager manager;

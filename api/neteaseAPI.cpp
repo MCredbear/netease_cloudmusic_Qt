@@ -34,6 +34,10 @@ QByteArray neteaseAPI::loginQRKey()
 {
     return ::loginQRKey();
 }
+QByteArray neteaseAPI::loginQRCreate(QByteArray key)
+{
+    return ::loginQRCreate(key);
+}
 QByteArray neteaseAPI::lyric(QByteArray id)
 {
     return ::lyric(id);

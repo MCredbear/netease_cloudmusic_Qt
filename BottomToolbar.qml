@@ -1,19 +1,18 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import QtMultimedia
 
-ToolBar {
+Rectangle {
     id: bottom_toolbar
     z: 10
-    anchors.bottom: parent.bottom
-    anchors.bottomMargin: 0
-    width: parent.width
+    width: 500
     height: 80
-    background: Rectangle {
-        color: "#ffffff"
-    }
+    color: "#ffffff"
+
     Rectangle {
         anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width
         height: 3
         color: "red"
@@ -24,7 +23,11 @@ ToolBar {
         anchors.verticalCenter: parent.verticalCenter
         width: 40
         height: 40
-        text: "play"
+        text: {if (player.playbackState == MediaPlayer.PlayingState) return "stop"
+            else  return "play"}
+        onReleased: {
+            if (player.hasAudio) {if (player.playbackState == MediaPlayer.PlayingState) {player.pause()} else {player.play()}}
+        }
     }
     Button {
         id: previous_button
@@ -34,6 +37,7 @@ ToolBar {
         width: 40
         height: 40
         text: "pre"
+
     }
     Button {
         id: next_button
@@ -76,3 +80,5 @@ ToolBar {
         text: "artist"
     }
 }
+
+

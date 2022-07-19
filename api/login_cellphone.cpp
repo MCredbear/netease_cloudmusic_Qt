@@ -9,7 +9,7 @@
 #include "crypto/weapi.h"
 #include "cookie.h"
 
-// from https://github.com/binaryify/NeteaseCloudMusicApi/module/login_cellphone
+// from https://github.com/binaryify/NeteaseCloudMusicApi/module/login_cellphone.js
 
 
 QByteArray loginCellphoneWithPassword(QByteArray countrycode, QByteArray phone, QByteArray password) //网易云NM$L，现在这个登录方法用不了了
@@ -37,7 +37,6 @@ QByteArray loginCellphoneWithPassword(QByteArray countrycode, QByteArray phone, 
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
     eventloop.exec();
     writeCookie(manager.cookieJar()->cookiesForUrl(linuxUrl));
-    qDebug()<<QString::fromUtf8(reply->readAll());
     return reply->readAll();
 }
 

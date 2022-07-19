@@ -1,11 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>image/local_music_icon.svg</file>
-        <file>image/historical_music_icon.svg</file>
-        <file>image/clouddrive_music_icon.svg</file>
-        <file>image/downloaded_music_icon.svg</file>
-        <file>image/unlogined.svg</file>
-        <file>image/bought_music_icon.svg</file>
+        <file>images/local_music_icon.svg</file>
+        <file>images/historical_music_icon.svg</file>
+        <file>images/clouddrive_music_icon.svg</file>
+        <file>images/downloaded_music_icon.svg</file>
+        <file>images/unlogined.svg</file>
+        <file>images/bought_music_icon.svg</file>
         <file>images/netease-cloud-music.svg</file>
     </qresource>
 </RCC>

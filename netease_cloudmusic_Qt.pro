@@ -23,7 +23,9 @@ SOURCES += \
         api/song_url.cpp \
         api/user_account.cpp \
         api/user_playlist.cpp \
-        main.cpp 
+        api/login_qr_create.cpp \
+        main.cpp  \
+        qr_image_provider.cpp
 
 android: SOURCES += permissions.cpp
 
@@ -35,7 +37,7 @@ CONFIG += embed_translations
 
 android: include(statusbar/src/statusbar.pri)
 
-!android: LIBS += -lcrypto
+#!android: LIBS += -lcrypto
 android: include(/home/redbear/android-sdk-linux/android_openssl/openssl.pri)   # Qt's support for Android is still too poor
 android: LIBS+= /home/redbear/android-sdk-linux/android_openssl/no-asm/latest/arm64/libcrypto.so.
 android: INCLUDEPATH += /home/redbear/android-sdk-linux/android_openssl/static/include/
@@ -83,7 +85,9 @@ HEADERS += \
     api/song_url.h \
     api/user_account.h \
     api/user_playlist.h \
-    api/playlist_detail.h 
+    api/playlist_detail.h \
+    api/login_qr_create.h \
+    qr_image_provider.h
 
 android: HEADERS += permissions.h
 
