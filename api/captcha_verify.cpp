@@ -8,7 +8,7 @@
 
 QByteArray captchaVerify(QByteArray countrycode, QByteArray phone, QByteArray captcha) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/captcha_verify.js
 {
-    const QByteArray url = "https://music.163.com/weapi/sms/captcha/verify";
+    const QByteArray url = "https://music.163.com/api/sms/captcha/verify";
     QNetworkAccessManager manager;
     QNetworkRequest request;
     QEventLoop eventloop;
@@ -22,6 +22,7 @@ QByteArray captchaVerify(QByteArray countrycode, QByteArray phone, QByteArray ca
         "captcha":"$captcha"
     }
     */
+    postData = linuxapi(url, postData);
     QNetworkReply *reply = manager.post(request, postData);
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)), &eventloop, SLOT(quit()));
     eventloop.exec();

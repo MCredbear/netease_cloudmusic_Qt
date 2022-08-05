@@ -3,7 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
 Popup {
-    id: login_page
+    id: loginPage
     width: 200
     height: 300
     Column {
@@ -18,18 +18,18 @@ Popup {
             height: 50
             color: "transparent"
             TextInput {
-                id: account_input
+                id: accountInput
                 anchors.fill: parent
                 font.pointSize: 18
                 clip: true
             }
             TextInput {
-                id: account_mask
-                anchors.fill: account_input
+                id: accountMask
+                anchors.fill: accountInput
                 text: qsTr("手机号")
                 font.pointSize: 18
                 color: "#bbbbbb"
-                visible: account_input.length === 0 ? account_input.focus ? true : true : false
+                visible: accountInput.length === 0 ? accountInput.focus ? true : true : false
                 readOnly: true
                 enabled: false
             }
@@ -39,18 +39,18 @@ Popup {
             height: 50
             color: "transparent"
             TextInput {
-                id: password_input
+                id: captchaInput
                 anchors.fill: parent
                 font.pointSize: 18
                 clip: true
             }
             TextInput {
-                id: password_mask
-                anchors.fill: password_input
-                text: qsTr("密码")
+                id: captchaMask
+                anchors.fill: captchaInput
+                text: qsTr("验证码")
                 font.pointSize: 18
                 color: "#bbbbbb"
-                visible: password_input.length === 0 ? password_input.focus ? true : true : false
+                visible: captchaInput.length === 0 ? captchaInput.focus ? true : true : false
                 readOnly: true
                 enabled: false
             }
@@ -58,25 +58,45 @@ Popup {
         Button {
             width: 130
             height: 50
+            text: qsTr("发送验证码")
+            onReleased: {
+                var captchaSent = neteaseAPI.captchaSent("86", accountInput.text)
+                console.log(captchaSent)
+            }
+        }
+        Button {
+            width: 130
+            height: 50
             text: qsTr("登录")
             onReleased: {
-                neteaseAPI.loginCellphone("86", account_input.text, password_input.text)
-                var userAccount = neteaseAPI.userAccount()
-                
-                console.log(userAccount)
-                
-                if (userAccount !== "") {
-                    account_input.text = ""
-                    password_input.text = ""
-                    login_page.close()
-                    var json = JSON.parse(userAccount)
-                    userProfile = {
-                        logined : true,
-                        id : json.profile.userId.toString(),
-                        name : json.profile.nickname,
-                        avatarUrl : json.profile.avatarUrl
+                var captchaVerify = neteaseAPI.captchaVerify("86", accountInput.text, captchaInput.text)
+                if (captchaVerify !== "") {
+                    var captchaVerifyJson = JSON.parse(captchaVerify)
+                    if (captchaVerifyJson.data === true) {
+                        console.log(neteaseAPI.loginCellphone("86", accountInput.text, captchaInput.text))
+                        var userAccount = neteaseAPI.userAccount()
+
+                        console.log(userAccount)
+
+                        if (userAccount !== "") {
+                            accountInput.text = ""
+                            captchaInput.text = ""
+                            loginPage.close()
+                            var json = JSON.parse(userAccount)
+                            userProfile = {
+                                logined : true,
+                                id : json.profile.userId.toString(),
+                                name : json.profile.nickname,
+                                avatarUrl : json.profile.avatarUrl
+                            }
+                        }
+                    }
+                    else {
+                        text = "验证码错误"
                     }
                 }
+
+
             }
         }
     }

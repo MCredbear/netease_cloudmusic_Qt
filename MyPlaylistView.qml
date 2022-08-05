@@ -73,6 +73,7 @@ Text {
     font.pointSize: 11
     text: name
     elide: Text.ElideRight
+    clip: true
     color: "#000000"
 }
 Text {

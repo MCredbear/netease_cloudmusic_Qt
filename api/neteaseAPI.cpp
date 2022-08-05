@@ -26,9 +26,9 @@ QByteArray neteaseAPI::captchaVerify(QByteArray countrycode, QByteArray phone, Q
 {
     return ::captchaVerify(countrycode, phone, captcha);
 }
-QByteArray neteaseAPI::loginCellphone(QByteArray countrycode, QByteArray phone, QByteArray password) //暂时只用密码
+QByteArray neteaseAPI::loginCellphone(QByteArray countrycode, QByteArray phone, QByteArray captcha) //暂时只用验证码
 {
-    return ::loginCellphoneWithPassword(countrycode, phone, password);
+    return ::loginCellphoneWithCaptcha(countrycode, phone, captcha);
 }
 QByteArray neteaseAPI::loginQRKey()
 {

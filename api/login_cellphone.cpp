@@ -48,6 +48,7 @@ QByteArray loginCellphoneWithCaptcha(QByteArray countrycode, QByteArray phone, Q
     QEventLoop eventloop;
     request.setUrl(linuxUrl);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+    request.setRawHeader("Cookie", "NMTID=; MUSIC_U=; __remember_me=true; os=pc");
     QByteArray postData = "{\"phone\":\"" + phone + "\",\"countrycode\":\"" + countrycode + "\",\"captcha\":\"" + captcha + "\",\"rememberLogin\":\"true\"}";
     /*
     {
