@@ -11,42 +11,8 @@ ListView {
         width: parent.width
         height: 50
         onReleased: {
-            playlistName.text = name
-            playlistCover.source = coverUrl
-            playlistTrackCount.text = trackCount.toString() + qsTr("首")
-            playlistCreatorName.text = qsTr("创建者：") + creatorName
-            playlistDescription.text = description
-            playlist.clear()
-            var playlistDetail = neteaseAPI.playlistDetail(id)
-            if (playlistDetail !== "")
-            {
-                var json = JSON.parse(playlistDetail)
-                var tracks = json.playlist.tracks
-                for (var song in tracks) {
-                var _id = tracks[song].id
-                var _name = tracks[song].name
-                var artist = ""
-                for (var _artist in tracks[song].ar) artist += "/" + tracks[song].ar[_artist].name
-                artist = artist.substr(1)
-                var alia = ""
-                for (var _alia in tracks[song].alia) alia += tracks[song].alia[_alia]
-                if (tracks[song].hasOwnProperty("tns"))
-                for (var tn in tracks[song].tns) alia += tracks[song].tns[tn]
-                var album = tracks[song].al.name
-                var cover = tracks[song].al.picUrl
-                playlist.append(
-                {
-                    "id": _id,
-                    "name": _name,
-                    "artist": artist,
-                    "alia": alia,
-                    "album": album,
-                    "cover": cover
-                }
-            )
+            stackView.push(playlistPage,{"id": id})
         }
-    }
-}
 
         Material_Image {
             id: cover
@@ -83,10 +49,11 @@ ListView {
             color: "#9f000000"
             text: trackCount.toString() + qsTr("首")
         }
-}
+    }
 }
 /*##^##
 Designer {
     D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/
+

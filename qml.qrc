@@ -10,5 +10,8 @@
         <file>Material_Button.qml</file>
         <file>Material_Image.qml</file>
         <file>Material_Rectangle.qml</file>
+        <file>RecentSongPlaylistView.qml</file>
+        <file>RecentSongPlaylistPage.qml</file>
+        <file>PlaylistPage.qml</file>
     </qresource>
 </RCC>

@@ -50,6 +50,10 @@ QByteArray neteaseAPI::recordRecentSong(QByteArray limit)
 {
     return ::recordRecentSong(limit);
 }
+QByteArray neteaseAPI::searchSuggest(QByteArray keywords)
+{
+    return ::searchSuggest(keywords);
+}
 QByteArray neteaseAPI::songDetail(QByteArray id)
 {
     return ::songDetail(id);
