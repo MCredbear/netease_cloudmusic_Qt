@@ -7,7 +7,7 @@
 #include "api/crypto/linuxapi.h"
 #include "cookie.h"
 
-QByteArray searchSuggest(QByteArray keywords)
+QByteArray searchSuggest(QByteArray keywords) // from https://github.com/binaryify/NeteaseCloudMusicApi/module/search_suggest.js
 {
     const QByteArray url = "https://music.163.com/api/search/suggest/keyword";
     QNetworkAccessManager manager;
