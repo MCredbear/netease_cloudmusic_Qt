@@ -27,6 +27,7 @@ public:
     Q_INVOKABLE QByteArray captchaVerify(QByteArray countrycode, QByteArray phone, QByteArray captcha);
     Q_INVOKABLE QByteArray loginCellphone(QByteArray countrycode, QByteArray phone, QByteArray password); //暂时只用密码
     Q_INVOKABLE QByteArray loginQRKey();
+    Q_INVOKABLE QByteArray loginQRCheck(QByteArray key);
     Q_INVOKABLE QByteArray loginQRCreate(QByteArray key);
     Q_INVOKABLE QByteArray lyric(QByteArray id);
     Q_INVOKABLE QByteArray playlistDetail(QByteArray id);

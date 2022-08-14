@@ -13,5 +13,7 @@
         <file>RecentSongPlaylistView.qml</file>
         <file>RecentSongPlaylistPage.qml</file>
         <file>PlaylistPage.qml</file>
+        <file>qqr.js</file>
+        <file>QRCode.qml</file>
     </qresource>
 </RCC>

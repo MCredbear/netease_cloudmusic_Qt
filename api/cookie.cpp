@@ -18,7 +18,7 @@ void writeCookie(QList<QNetworkCookie> cookieList) //覆盖原有cookie
     QFile cookieFile("./cookie");
     cookieFile.open(QIODevice::WriteOnly);
     QByteArray cookieString;
-    for (int i = 0; i < cookieList.length(); i++) cookieString.append(cookieList.at(i).toRawForm());
+    for (int i = 0; i < cookieList.length(); i++) cookieString.append(cookieList.at(i).toRawForm() + ";");
     cookie = cookieString;
     cookieFile.write(cookieString);
     cookieFile.close();

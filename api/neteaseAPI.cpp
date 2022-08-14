@@ -5,6 +5,8 @@
 #include "captcha_sent.h"
 #include "captcha_verify.h"
 #include "login_cellphone.h"
+#include "login_qr_check.h"
+#include "login_qr_create.h"
 #include "login_qr_key.h"
 #include "lyric.h"
 #include "record_recent_song.h"
@@ -30,13 +32,17 @@ QByteArray neteaseAPI::loginCellphone(QByteArray countrycode, QByteArray phone, 
 {
     return ::loginCellphoneWithCaptcha(countrycode, phone, captcha);
 }
-QByteArray neteaseAPI::loginQRKey()
+QByteArray neteaseAPI::loginQRCheck(QByteArray key)
 {
-    return ::loginQRKey();
+    return ::loginQRCheck(key);
 }
 QByteArray neteaseAPI::loginQRCreate(QByteArray key)
 {
     return ::loginQRCreate(key);
+}
+QByteArray neteaseAPI::loginQRKey()
+{
+    return ::loginQRKey();
 }
 QByteArray neteaseAPI::lyric(QByteArray id)
 {

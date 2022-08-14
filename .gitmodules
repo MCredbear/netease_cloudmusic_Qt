@@ -4,3 +4,9 @@
 [submodule "statusbar"]
 	path = statusbar
 	url = https://github.com/jpnurmi/statusbar
+[submodule "qqr.js"]
+	path = qqr.js
+	url = git@github.com:M4rtinK/qqr.js.git
+[submodule "qqr"]
+	path = qqr
+	url = git@github.com:M4rtinK/qqr.js.git

@@ -6,7 +6,7 @@
 #include <QCryptographicHash>
 #include <QDebug>
 #include "crypto/linuxapi.h"
-#include "crypto/weapi.h"
+//#include "crypto/weapi.h"
 #include "cookie.h"
 
 // from https://github.com/binaryify/NeteaseCloudMusicApi/module/login_cellphone.js

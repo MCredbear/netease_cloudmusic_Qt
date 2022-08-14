@@ -12,6 +12,7 @@ SOURCES += \
         api/captcha_verify.cpp \
         api/cookie.cpp \
         api/login_cellphone.cpp \
+        api/login_qr_check.cpp \
         api/login_qr_key.cpp \
         api/lyric.cpp \
         api/crypto/weapi.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
     api/crypto/linuxapi.h \
     api/crypto/weapi.h \
     api/login_cellphone.h \
+    api/login_qr_check.h \
     api/login_qr_key.h \
     api/lyric.h \
     api/neteaseAPI.h \

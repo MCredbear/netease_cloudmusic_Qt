@@ -25,6 +25,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         source: "images/netease-cloud-music.svg"
         Label {
+            color: "#000000"
             anchors.left: parent.right
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 4

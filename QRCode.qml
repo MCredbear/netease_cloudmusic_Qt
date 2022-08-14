@@ -1,0 +1,1 @@
+qqr/QRCode.qml

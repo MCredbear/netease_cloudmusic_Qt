@@ -13,26 +13,42 @@ Window {
     title: qsTr("网易云音乐") // @disable-check M16
     color: "#eeeeee"
 
-    // Button {
-    //     z: 4
-    //     x: 200
-    //     y: 200
-    //     width: 50
-    //     height: 50
-    //     onReleased: {
-    //         var loginQRKey = neteaseAPI.loginQRKey()
-    //         var json = JSON.parse(loginQRKey)
-    //         var key = json.unikey
-    //         console.log(key)
-    //         qrImage.source = "image://qrImage/" + key
+    function init() {
+        var json
+        var userAccount = neteaseAPI.userAccount()
+        if (userAccount !== "") {
+            json = JSON.parse(userAccount)
+            userProfile = {
+                "logined": true,
+                "id": json.profile.userId.toString(),
+                "name": json.profile.nickname,
+                "avatarUrl": json.profile.avatarUrl
+            }
+        }
+        var userPlaylist = neteaseAPI.userPlaylist(userProfile.id)
+        if (userPlaylist !== "") {
+            json = JSON.parse(userPlaylist)
+            var playlists = json.playlist
+            for (var playlist in playlists) {
+                if (!playlists[playlist].subscribed) {
+                    myPlaylistView.model.append({
+                                        "id": playlists[playlist].id,
+                                        "name": playlists[playlist].name,
+                                        "trackCount": playlists[playlist].trackCount,
+                                        "coverUrl": playlists[playlist].coverImgUrl,
+                                      })
+                } else {
+                    subscribedPlaylistView.model.append({
+                                                  "id": playlists[playlist].id,
+                                                  "name": playlists[playlist].name,
+                                                  "trackCount": playlists[playlist].trackCount,
+                                                  "coverUrl": playlists[playlist].coverImgUrl,
+                                              })
+                }
+            }
+        }
+    }
 
-    //     }
-    //     Image {
-    //         id: qrImage
-    //         anchors.fill: parent
-
-    //     }
-    // }
     Component.onCompleted: {
         var userAccount = neteaseAPI.userAccount()
         if (userAccount !== "") {
@@ -95,7 +111,7 @@ Window {
                     visible: !userProfile.logined
                     text: qsTr("登录")
                     onReleased: {
-                        login_page.open()
+                        loginPage.open()
                     }
                 }
                 Image {
@@ -323,7 +339,7 @@ Window {
     }
 
     LoginPage {
-        id: login_page
+        id: loginPage
         x: (window.width - width) / 2
         y: (window.height - height) / 2
     }
