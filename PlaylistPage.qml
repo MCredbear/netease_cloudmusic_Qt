@@ -225,12 +225,12 @@ Rectangle {
                                     })
                                 }
                                 lyricView.model.clear()
-                                for (var i in lyricModel) {
+                                for (var n in lyricModel) {
                                     lyricView.model.append({
-                                        "time": lyricModel[i].time,
-                                        "originalLyric": lyricModel[i].originalLyric,
-                                        "translatedLyric": lyricView.hasTranslatedLyric? lyricModel[i].translatedLyric : "",
-                                        "romanianLyric": lyricView.hasRomanianLyric? lyricModel[i].romanianLyric : ""
+                                        "time": lyricModel[n].time,
+                                        "originalLyric": lyricModel[n].originalLyric,
+                                        "translatedLyric": lyricView.hasTranslatedLyric? lyricModel[n].translatedLyric : "",
+                                        "romanianLyric": lyricView.hasRomanianLyric? lyricModel[n].romanianLyric : ""
                                     })
                                 }
                             }
@@ -273,7 +273,7 @@ Rectangle {
                     color: "#424242"
                     Layout.preferredHeight: parent.height
                     Layout.fillWidth: true
-                    text: (alia == "") ? "" : qsTr("（") + alia + qsTr("）")
+                    text: (alia === "") ? "" : qsTr("（") + alia + qsTr("）")
                     elide: Text.ElideRight
                     font.pointSize: 12
                 }
