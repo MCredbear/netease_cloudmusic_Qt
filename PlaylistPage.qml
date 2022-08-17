@@ -5,10 +5,6 @@ import QtQuick.Layouts 1.15
 
 Rectangle {
     id: playlistPage
-    Layout.alignment: Qt.AlignLeft
-    Layout.preferredWidth: 500
-    Layout.fillWidth: true
-    Layout.fillHeight: true
     color: "grey"
     property string id
 

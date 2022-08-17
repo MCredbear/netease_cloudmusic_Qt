@@ -15,5 +15,6 @@
         <file>PlaylistPage.qml</file>
         <file>qqr.js</file>
         <file>QRCode.qml</file>
+        <file>SearchPage.qml</file>
     </qresource>
 </RCC>

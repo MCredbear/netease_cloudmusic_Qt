@@ -1,16 +1,43 @@
 import QtQuick 6.2
 import QtQuick.Window 6.2
 import QtQuick.Controls 6.2
+import QtQuick.Layouts 1.15
 
 ListView {
     id: playlistView
-    x: 0
-    anchors.top: playlistInformation.bottom
-    anchors.bottom: parent.bottom
-    anchors.bottomMargin: 0
-    anchors.topMargin: 0
-    width: parent.width
     clip: true
+    Component.onCompleted: {
+        var recordRecentSong = neteaseAPI.recordRecentSong("300")
+        if (recordRecentSong !== "") {
+            var json = JSON.parse(recordRecentSong)
+            var list = json.data.list
+            for (var song in list) {
+                var _id = list[song].data.id
+                var _name = list[song].data.name
+                var artist = ""
+                for (var _artist in list[song].data.ar)
+                    artist += "/" + list[song].data.ar[_artist].name
+                artist = artist.substr(1)
+                var alia = ""
+                for (var _alia in list[song].data.alia)
+                    alia += list[song].data.alia[_alia]
+                if (list[song].hasOwnProperty("tns"))
+                    for (var tn in list[song].data.tns)
+                        alia += list[song].data.tns[tn]
+                var album = list[song].data.al.name
+                var cover = list[song].data.al.picUrl
+                playlist.append({
+                                    "id": _id,
+                                    "name": _name,
+                                    "artist": artist,
+                                    "alia": alia,
+                                    "album": album,
+                                    "cover": cover
+                                })
+            }
+        }
+    }
+
     model: ListModel {
         id: playlist
     }

@@ -10,6 +10,7 @@ SOURCES += \
         Qt-AES/qaesencryption.cpp \
         api/captcha_sent.cpp \
         api/captcha_verify.cpp \
+        api/cloudsearch.cpp \
         api/cookie.cpp \
         api/login_cellphone.cpp \
         api/login_qr_check.cpp \
@@ -75,6 +76,7 @@ HEADERS += \
     api/cache.h \
     api/captcha_sent.h \
     api/captcha_verify.h \
+    api/cloudsearch.h \
     api/cookie.h \
     api/crypto/linuxapi.h \
     api/crypto/weapi.h \

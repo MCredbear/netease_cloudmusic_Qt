@@ -25,6 +25,11 @@ Window {
                 "avatarUrl": json.profile.avatarUrl
             }
         }
+        var recordRecentSong = neteaseAPI.recordRecentSong("300")
+        if (recordRecentSong !== "") {
+            json = JSON.parse(recordRecentSong)
+            recentSongCountText.text = json.data.total.toString() + qsTr("首")
+        }
         var userPlaylist = neteaseAPI.userPlaylist(userProfile.id)
         if (userPlaylist !== "") {
             json = JSON.parse(userPlaylist)
@@ -176,6 +181,58 @@ Window {
                     anchors.fill: parent
                     spacing: 5
 
+                    MouseArea {
+                            width: parent.width
+                            height: 50
+                            Component.onCompleted: {
+                                var recordRecentSong = neteaseAPI.recordRecentSong("300")
+                                if (recordRecentSong !== "") {
+                                    var json = JSON.parse(recordRecentSong)
+                                    recentSongCountText.text = json.data.total.toString() + qsTr("首")
+                                }
+                            }
+
+                            onReleased: {
+                                stackView.push(recentSongPlaylistPage)
+                            }
+
+                            Image {
+                                id: recentSongCover
+                                anchors.left: parent.left
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: 45
+                                height: 45
+                                source: "images/historical_music_icon.svg"
+                                anchors.leftMargin: 12
+                            }
+                            Text {
+                                anchors.left: recentSongCover.right
+                                verticalAlignment: Text.AlignBottom
+                                lineHeight: 0.8
+                                anchors.leftMargin: 10
+                                width: parent.width - 75
+                                height: 35
+                                wrapMode: Text.WordWrap
+                                font.pointSize: 11
+                                text: qsTr("最近播放")
+                                elide: Text.ElideRight
+                                clip: true
+                                color: "#000000"
+                            }
+                            Text {
+                                id: recentSongCountText
+                                anchors.left: recentSongCover.right
+                                y: 38
+                                verticalAlignment: Text.AlignBottom
+                                font.pointSize: 8
+                                anchors.leftMargin: 10
+                                width: parent.width - 75
+                                height: 10
+                                color: "#9f000000"
+                                text: ""
+                            }
+                        }
+
                     Text {
                         width: parent.width - 20
                         height: 15
@@ -241,9 +298,11 @@ Window {
             Layout.fillHeight: true
             Component {
                 id: playlistPage
-                PlaylistPage {
-
-                }
+                PlaylistPage {}
+            }
+            Component {
+                id: recentSongPlaylistPage
+                RecentSongPlaylistPage {}
             }
         }
 

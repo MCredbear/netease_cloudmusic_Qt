@@ -5,6 +5,7 @@
 
 #include "captcha_sent.h"
 #include "captcha_verify.h"
+#include "cloudsearch.h"
 #include "login_cellphone.h"
 #include "login_qr_key.h"
 #include "login_qr_create.h"
@@ -25,6 +26,7 @@ public:
 
     Q_INVOKABLE QByteArray captchaSent(QByteArray countrycode, QByteArray phone);
     Q_INVOKABLE QByteArray captchaVerify(QByteArray countrycode, QByteArray phone, QByteArray captcha);
+    Q_INVOKABLE QByteArray cloudSearch(QByteArray keywords, QByteArray type, QByteArray limit, QByteArray offset);
     Q_INVOKABLE QByteArray loginCellphone(QByteArray countrycode, QByteArray phone, QByteArray password); //暂时只用密码
     Q_INVOKABLE QByteArray loginQRKey();
     Q_INVOKABLE QByteArray loginQRCheck(QByteArray key);
