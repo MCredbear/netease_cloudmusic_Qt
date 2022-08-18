@@ -193,7 +193,12 @@ Window {
                             }
 
                             onReleased: {
-                                stackView.push(recentSongPlaylistPage)
+                                if (stackView.currentItem.objectName === "recentSongPlaylistPage") {
+                                    stackView.replace(recentSongPlaylistPage)
+                                }
+                                else {
+                                    stackView.push(recentSongPlaylistPage)
+                                }
                             }
 
                             Image {
@@ -296,13 +301,30 @@ Window {
             Layout.preferredWidth: 500
             Layout.fillWidth: true
             Layout.fillHeight: true
+            initialItem: initPage
+            Component {
+                id: initPage
+                Rectangle {
+                    objectName: "initPage"
+                }
+            }
             Component {
                 id: playlistPage
-                PlaylistPage {}
+                PlaylistPage {
+                    objectName: "playlistPage"
+                }
             }
             Component {
                 id: recentSongPlaylistPage
-                RecentSongPlaylistPage {}
+                RecentSongPlaylistPage {
+                    objectName: "recentSongPlaylistPage"
+                }
+            }
+            Component {
+                id: searchPage
+                SearchPage {
+                    objectName: "searchPage"
+                }
             }
         }
 

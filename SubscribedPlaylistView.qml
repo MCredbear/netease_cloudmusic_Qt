@@ -11,7 +11,12 @@ ListView {
         width: parent.width
         height: 50
         onReleased: {
-            stackView.push(playlistPage,{"id": id})
+            if (stackView.currentItem.objectName === "playlistPage") {
+                stackView.replace(playlistPage,{"id": id})
+            }
+            else {
+                stackView.push(playlistPage,{"id": id})
+            }
         }
 
         Material_Image {

@@ -60,6 +60,10 @@ QByteArray neteaseAPI::recordRecentSong(QByteArray limit)
 {
     return ::recordRecentSong(limit);
 }
+QByteArray neteaseAPI::search(QByteArray keywords, QByteArray type, QByteArray limit, QByteArray offset)
+{
+    return ::search(keywords, type, limit, offset);
+}
 QByteArray neteaseAPI::searchSuggest(QByteArray keywords)
 {
     return ::searchSuggest(keywords);

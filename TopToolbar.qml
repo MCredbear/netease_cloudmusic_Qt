@@ -51,7 +51,6 @@ Rectangle {
                 interval: 200
                 onTriggered: {
                     var searchSuggest = neteaseAPI.searchSuggest(searchInput.text)
-                    console.log(searchSuggest)
                     var json = JSON.parse(searchSuggest)
                     if (json.code !== 400) {
                         searchSuggestListView.model.clear()
@@ -68,6 +67,15 @@ Rectangle {
             }
             onTextEdited: {
                 timer.restart()
+            }
+            onAccepted: {
+                focus = false
+                if (stackView.currentItem.objectName === "searchPage") {
+                    stackView.replace(searchPage,{"keyword":searchInput.text})
+                }
+                else {
+                    stackView.push(searchPage,{"keyword":searchInput.text})
+                }
             }
         }
         TextInput { // Label's text has a position error
@@ -88,6 +96,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             height: model.count * 30
+            visible: searchInput.focus
             model: ListModel {}
             delegate: Material_Button {
                 width: searchSuggestListView.width

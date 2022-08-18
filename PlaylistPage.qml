@@ -47,11 +47,13 @@ Rectangle {
 
     Rectangle {
         id: playlistInformation
+        z: 2
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         height: 100
         color: "white"
+
         RowLayout {
             anchors.fill: parent
             anchors.rightMargin: 15
@@ -114,13 +116,10 @@ Rectangle {
     }
     ListView {
         id: playlistView
-        x: 0
         anchors.top: playlistInformation.bottom
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.topMargin: 0
-        width: parent.width
-        clip: true
+        anchors.left: parent.left
+        anchors.right: parent.right
         model: ListModel {
             id: playlist
         }

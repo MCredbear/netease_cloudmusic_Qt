@@ -21,6 +21,7 @@ SOURCES += \
         api/neteaseAPI.cpp \
         api/playlist_detail.cpp \
         api/record_recent_song.cpp \
+        api/search.cpp \
         api/search_suggest.cpp \
         api/song_detail.cpp \
         api/song_url.cpp \
@@ -86,6 +87,7 @@ HEADERS += \
     api/lyric.h \
     api/neteaseAPI.h \
     api/record_recent_song.h \
+    api/search.h \
     api/search_suggest.h \
     api/song_detail.h \
     api/song_url.h \

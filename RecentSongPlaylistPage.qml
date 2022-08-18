@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.15
 
 ListView {
     id: playlistView
-    clip: true
     Component.onCompleted: {
         var recordRecentSong = neteaseAPI.recordRecentSong("300")
         if (recordRecentSong !== "") {

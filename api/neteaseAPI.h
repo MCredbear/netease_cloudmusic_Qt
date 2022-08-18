@@ -12,6 +12,7 @@
 #include "lyric.h"
 #include "playlist_detail.h"
 #include "record_recent_song.h"
+#include "search.h"
 #include "search_suggest.h"
 #include "song_detail.h"
 #include "song_url.h"
@@ -34,6 +35,7 @@ public:
     Q_INVOKABLE QByteArray lyric(QByteArray id);
     Q_INVOKABLE QByteArray playlistDetail(QByteArray id);
     Q_INVOKABLE QByteArray recordRecentSong(QByteArray limit);
+    Q_INVOKABLE QByteArray search(QByteArray keywords, QByteArray type, QByteArray limit, QByteArray offset);
     Q_INVOKABLE QByteArray searchSuggest(QByteArray keywords);
     Q_INVOKABLE QByteArray songDetail(QByteArray id);
     Q_INVOKABLE QByteArray songUrl(QByteArray id);
