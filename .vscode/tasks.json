@@ -20,11 +20,11 @@
         {
             "type": "shell",
             "label": "qmake  Debug",
-            "command": "/home/redbear/Qt/6.2.4/gcc_64/bin/qmake",
+            "command": "E:/Qt/6.2.4/mingw_64/bin/qmake.exe",
             "args": [
                 "../netease_cloudmusic_Qt.pro",
                 "-spec",
-                "linux-g++",
+                "win32-g++",
                 "CONFIG+=debug",
                 "CONFIG+=qml_debug"
             ],
@@ -40,7 +40,7 @@
         {
             "type": "shell",
             "label": "make clean",
-            "command": "make",
+            "command": "E:/Qt/Tools/mingw1120_64/bin/mingw32-make.exe",
             "args": [
                 "clean",
                 "-j16"
@@ -57,7 +57,7 @@
         {
             "type": "shell",
             "label": "make all",
-            "command": "make",
+            "command": "E:/Qt/Tools/mingw1120_64/bin/mingw32-make.exe",
             "args": [
                 "all",
                 "-j16"
