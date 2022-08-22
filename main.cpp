@@ -18,7 +18,6 @@
 
 #include "api/neteaseAPI.h"
 #include "api/cookie.h"
-#include "qr_image_provider.h"
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroid>
@@ -93,7 +92,6 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("neteaseAPI", &api);
     engine.setNetworkAccessManagerFactory(&QMLNetworkAccessManagerFactory);
-    engine.addImageProvider("qrImage", new QRImageProvider);
 
 #ifndef Q_OS_ANDROID
     const QUrl url(QStringLiteral("qrc:/main.qml"));

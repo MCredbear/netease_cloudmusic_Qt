@@ -12,8 +12,8 @@
         <file>Material_Rectangle.qml</file>
         <file>RecentSongPlaylistPage.qml</file>
         <file>PlaylistPage.qml</file>
-        <file>qqr.js</file>
-        <file>QRCode.qml</file>
+        <file>qqr/qqr.js</file>
+        <file>qqr/QRCode.qml</file>
         <file>SearchPage.qml</file>
     </qresource>
 </RCC>

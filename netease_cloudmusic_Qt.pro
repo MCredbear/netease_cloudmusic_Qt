@@ -27,9 +27,9 @@ SOURCES += \
         api/song_url.cpp \
         api/user_account.cpp \
         api/user_playlist.cpp \
+        api/vip_info.cpp \
         api/login_qr_create.cpp \
-        main.cpp  \
-        qr_image_provider.cpp
+        main.cpp
 
 android: SOURCES += permissions.cpp
 
@@ -93,9 +93,9 @@ HEADERS += \
     api/song_url.h \
     api/user_account.h \
     api/user_playlist.h \
+    api/vip_info.h \
     api/playlist_detail.h \
-    api/login_qr_create.h \
-    qr_image_provider.h
+    api/login_qr_create.h
 
 android: HEADERS += permissions.h
 
