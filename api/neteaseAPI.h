@@ -18,6 +18,7 @@
 #include "song_url.h"
 #include "user_account.h"
 #include "user_playlist.h"
+#include "vip_info.h"
 
 class neteaseAPI : public QObject
 {
@@ -41,6 +42,7 @@ public:
     Q_INVOKABLE QByteArray songUrl(QByteArray id);
     Q_INVOKABLE QByteArray userAccount();
     Q_INVOKABLE QByteArray userPlaylist(QByteArray id);
+    Q_INVOKABLE QByteArray vipInfo();
 
 signals:
 

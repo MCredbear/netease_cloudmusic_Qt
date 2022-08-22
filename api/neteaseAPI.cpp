@@ -84,3 +84,7 @@ QByteArray neteaseAPI::userPlaylist(QByteArray id)
 {
     return ::userPlaylist(id);
 }
+QByteArray neteaseAPI::vipInfo()
+{
+    return ::vipInfo();
+}
