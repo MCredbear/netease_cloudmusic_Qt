@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 
     CachingNetworkAccessManagerFactory QMLNetworkAccessManagerFactory;
 
-    neteaseAPI api; qDebug()<<QString::fromUtf8(api.vipInfo());
+    neteaseAPI api;
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

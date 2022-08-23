@@ -350,7 +350,7 @@ Window {
                 anchors.rightMargin: 40
                 anchors.leftMargin: 40
                 spacing: 10
-                highlightRangeMode: ListView.StrictlyEnforceRange
+                highlightRangeMode: autoScroll? ListView.StrictlyEnforceRange : ListView.NoHighlightRange
                 preferredHighlightBegin: height / 2
                 preferredHighlightEnd: height / 2
                 property bool hasLyric: false

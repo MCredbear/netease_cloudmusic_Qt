@@ -15,5 +15,6 @@
         <file>qqr/qqr.js</file>
         <file>qqr/QRCode.qml</file>
         <file>SearchPage.qml</file>
+        <file>player.js</file>
     </qresource>
 </RCC>
