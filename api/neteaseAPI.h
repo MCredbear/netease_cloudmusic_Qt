@@ -39,6 +39,7 @@ public:
     Q_INVOKABLE QByteArray search(QByteArray keywords, QByteArray type, QByteArray limit, QByteArray offset);
     Q_INVOKABLE QByteArray searchSuggest(QByteArray keywords);
     Q_INVOKABLE QByteArray songDetail(QByteArray id);
+    Q_INVOKABLE QByteArray songDetail(QByteArrayList idList);
     Q_INVOKABLE QByteArray songUrl(QByteArray id);
     Q_INVOKABLE QByteArray userAccount();
     Q_INVOKABLE QByteArray userPlaylist(QByteArray id);

@@ -72,6 +72,10 @@ QByteArray neteaseAPI::songDetail(QByteArray id)
 {
     return ::songDetail(id);
 }
+QByteArray neteaseAPI::songDetail(QByteArrayList idList)
+{
+    return ::songDetail(idList);
+}
 QByteArray neteaseAPI::songUrl(QByteArray id)
 {
     return ::songUrl(id);
